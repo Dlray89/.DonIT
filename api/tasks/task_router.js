@@ -1,6 +1,6 @@
 const express = require('express')
 
-const db = require('./tasks_Model')
+const db = require('./task_Modal')
 
 const router = express.Router()
 

@@ -1,6 +1,6 @@
 const express = require('express')
 
-const db = require('./projects_Model')
+const db = require('./tags_model')
 
 const router = express.Router()
 
