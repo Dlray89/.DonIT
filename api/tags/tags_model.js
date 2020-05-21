@@ -1,5 +1,5 @@
 const DB = require("../../knex-Config/db.config")
-
+const mapper = require('../helper/mappers')
 module.exports = {
     find,
     findById,
@@ -13,10 +13,26 @@ function find(){
 return DB("tags")
 }
 
-function findById(id) {
-return DB("tags")
-.where({id})
-.first()
+    function findById(id) {
+
+        let query = DB('tags')
+       
+        if (id) {
+            return query
+            .where('id', id)
+            .first()
+            .then(tag => {
+                if (tag) {
+                    return mapper.tagToBody(tag)
+                } else {
+                    return null
+                }
+            })
+        } else {
+            return query.then(tags => {
+                return tags.map(tag => mapper.tagToBody(tag))
+            })
+        }
 }
 
 function add(tag){
