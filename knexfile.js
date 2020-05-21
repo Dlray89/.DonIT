@@ -1,19 +1,17 @@
 // Update with your config settings.
 
-require("dotenv").config()
 module.exports = {
 
   development: {
-    client: 'postgres',
+    client: 'sqlite3',
     connection: {
-      host: process.env.HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB
+      filename: './dev.sqlite3'
     },
+    useNullAsDefault: true,
     migrations: {
         directory: './data/migrations'
     },
-    seeds: {
+    seeds:{
         directory: './data/seeds'
     }
   },
