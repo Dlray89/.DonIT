@@ -10,7 +10,7 @@ const session = require("cookie-session")
 const server = express()
 
 //setting up router
-// const projectRouter = require('./projects/projects_Router')
+const projectRouter = require('./projects/projects_Router')
 // const taskRouter = require('./tasks/task_router')
 // const tagRouter = require('./tags/tags_router')
 
@@ -36,7 +36,7 @@ server.use(express.json())
 //end of middlewear
 
 //set router endpoints here
-// server.use('/api/projects', projectRouter)
+server.use('/api/projects', projectRouter)
 // server.use('/api/tasks', taskRouter)
 // server.use('./api/tags', tagRouter)
 
