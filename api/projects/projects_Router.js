@@ -47,7 +47,7 @@ router.post('/', (req,res) => {
 
 
 //set up PUT request here
-router.put('/', (req,res) => {
+router.put('/:id', (req,res) => {
     const { id } = req.params
     const updateProject = req.body
 
@@ -63,13 +63,13 @@ router.put('/', (req,res) => {
 
 //set up delete here
 
-router.delete('/', (req,res) => {
+router.delete('/:id', (req,res) => {
     const { id } = req.params
 
     db
     .remove(id)
     .then(delProject => {
-        res.status(200).json(delProject)
+        res.status(201).json(delProject)
     })
     .catch(error => {
         res.status(500).json({errorMessage: `${error}: Something went wrong! We could not delete your project` })

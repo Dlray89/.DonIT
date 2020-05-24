@@ -38,7 +38,7 @@ server.use(express.json())
 //set router endpoints here
 server.use('/api/projects', projectRouter)
 server.use('/api/tasks', taskRouter)
-server.use('./api/tags', tagRouter)
+server.use('/api/tags', tagRouter)
 
 server.get('/api/testing', (req,res) => {
     res.status(200).json({message: `Your server in now up and running`})

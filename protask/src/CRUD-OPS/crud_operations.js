@@ -4,19 +4,19 @@ const getAllProjects = () => {
     return http.get('/api/projects')
 }
 
-const getProjectById = (id) => {
+const getProjectById = id => {
     return http.get(`/api/projects/${id}`)
 }
 
 const createProject = data => {
-    return http.post('/api/projects')
+    return http.post('/api/projects', data)
 }
 
 const updateProject = (id, data) => {
-    return http.put(`/api/projects/${id}, data`)
+    return http.put(`/api/projects/${id}`, data)
 }
 
-const removeProject = (id) => {
+const removeProject = id => {
     return http.delete(`/api/projects/${id}`)
 }
 

@@ -1,5 +1,7 @@
 import React, { useState } from "react"
+import { Link } from "react-router-dom"
 import crudOps from "../CRUD-OPS/crud_operations"
+import {TextField, Button} from "@material-ui/core"
 
 const AddProject = () => {
     const initialProjectState = {
@@ -35,7 +37,7 @@ const AddProject = () => {
                 details: res.data.details
             })
             setSubmitted(true)
-            console.log("prject create", res.data)
+            console.log("project create", res.data)
         })
         .catch(err => {
             console.log(err)
@@ -52,35 +54,41 @@ const AddProject = () => {
            {submitted ? (
                <div>
                    <p>You submitted successfully</p>
-                   <button onClick={newProject}>
-                       Create
-                       </button>
+                   <Link to='/projects'><button onClick={newProject}>
+                       Go to Projects
+                       </button></Link>
                </div>
            ) : (
                <div>
                    <div>
                        <p>Create new project</p>
-                       <input
+                       <TextField
+                       variant="outlined"
                         type='text'
                         id='project_name'
                         required
                         value={project.project_name}
                         onChange={handleChange}
                         name='project_name'
+                        placeholder='Project Name'
                          />
                    </div>
                    <div>
-                       <input
+                       <TextField
+                       multiline
+                       rows={7}
+                       variant="outlined"
                         type='text'
                         id='details'
                         required
                         value={project.details}
                         onChange={handleChange}
                         name='details'
+                        placeholder="Details of your project"
                          />
                    </div>
                    <div>
-                       <button onClick={saveProject}>Submit</button>
+                       <Button variant='outlined' onClick={saveProject}>Submit</Button>
                    </div>
                </div>
            )}

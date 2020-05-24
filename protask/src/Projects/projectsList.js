@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import axios from 'axios'
 import { Card, CardHeader, Button, makeStyles, TextField} from "@material-ui/core"
 
@@ -39,7 +40,7 @@ const ProjectList = () => {
 
     useEffect(() => {
         axios
-        .get('https://4000-ff89267f-2c46-4646-ba90-c18b86270fe2.ws-us02.gitpod.io/api/projects')
+        .get('https://5000-dbd33d06-65e0-40f3-85ef-a17160f76b31.ws-us02.gitpod.io/api/projects')
         .then(res => {
             const projectList = res.data.filter(project => 
                 project.project_name.toLowerCase().includes(query.toLowerCase()))
@@ -59,11 +60,12 @@ const ProjectList = () => {
                 {projects.map(project => (
                        <Card variant='outlined' className={classes.cardRoot}>
                            <CardHeader style={{display:'flex'}} title={project.project_name} subheader={project.details} />
+                        
+                           
 
                         <div className={classes.btnRoot}>
-                           <Button variant='outlined' className={classes.Button}>View Project</Button>
+                          <Link to={`/projects/${project.id}`}> <Button variant='outlined' className={classes.Button}>View Project</Button></Link>
 
-                           <Button variant='outlined' className={classes.Button}>View Project</Button>
                            </div>
                            
                        </Card>

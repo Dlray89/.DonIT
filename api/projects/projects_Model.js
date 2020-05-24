@@ -63,13 +63,13 @@ function update(id, changes){
     return DB('projects')
     .where('id', id)
     .update(changes)
-    .then(count => (count > 0 ? get(id) : null ))
+    .then(count => (count > 0 ? findById(id) : null ))
 }
 
 function remove(id){
-    return DB.update('projects')
+    return DB('projects')
     .where('id', id)
-    .del
+    .del()
 }
 
 function getProjectTasks(projectId) {
@@ -81,5 +81,5 @@ function getProjectTasks(projectId) {
 function getProjectTags(projectId){
     return DB('tags')
     .where('project_id', projectId) 
-    .then(tags => tags.map(tag => mapper.tagsToBody) )
+    .then(tags => tags.map(tag => mapper.tagsToBody(tag)) )
 }
