@@ -122,6 +122,17 @@ const Projects = props => {
         })
     }
 
+    //set delete tag
+    const deleteTag = () => {
+        TgCRUDOps.removeTag(currentTags.id)
+        .then(res => {
+            console.log("res.data")
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
 
     return (
         <div>
@@ -129,7 +140,7 @@ const Projects = props => {
                 <CardHeader title={currentProjects.project_name} subheader={currentProjects.details} />
                 <p>{currentTask.task_Name}</p>
                 <CardContent>
-                     {currentTags.name}
+                    <p key={currentTags.id}>{currentTags.name} <button onClick={deleteTag} > X </button></p>
                 </CardContent>
                
                 

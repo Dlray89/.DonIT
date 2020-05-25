@@ -1,17 +1,23 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import crudOps from "../CRUD-OPS/crud_operations"
+import TaskOps from "../CRUD-OPS/tasksCRUD"
 import {TextField, Button} from "@material-ui/core"
 
 const AddProject = () => {
     const initialProjectState = {
         id: null,
         project_name: '',
-        details:''
+        details:'',
+        tasks: {
+            task_Name:''
+        }
     }
+
 
     //define and set initial state
     const [project, setProjects] = useState(initialProjectState)
+    // const [task, setTask] = useState(initialProjectState)
     const [submitted, setSubmitted] = useState(false)
 
 
