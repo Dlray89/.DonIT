@@ -5,9 +5,9 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('projects').insert([
-        {id: 1, project_name: 'Feed The Homeless', details:'Plan a project to feed the homeless in the downtown areas'},
-        {id: 2, project_name: 'Create Project management App', details:'Create a Project management app using react and node.js'},
-        {id: 3, project_name: 'Movie App', details:'Organized movies collection to find my favorite and put them in special places'}
+        {id: 1, project_name: 'Feed The Homeless', details:'Plan a project to feed the homeless in the downtown areas', isActive: false},
+        {id: 2, project_name: 'Create Project management App', details:'Create a Project management app using react and node.js', isActive: false},
+        {id: 3, project_name: 'Movie App', details:'Organized movies collection to find my favorite and put them in special places', isActive: false}
       ]);
     });
 };

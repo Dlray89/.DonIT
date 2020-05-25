@@ -35,16 +35,18 @@ const useStyles = makeStyles((theme) => ({
 const ProjectList = () => {
     const classes = useStyles()
     const [projects, setProjects] = useState([])
+    // const [ loading, setLoading] = useState(false)
     const [query, setQuery] = useState('')
 
 
     useEffect(() => {
         axios
-        .get('https://5000-dbd33d06-65e0-40f3-85ef-a17160f76b31.ws-us02.gitpod.io/api/projects')
+        .get('https://5000-f23f26a3-c23b-44d0-9115-a16546a186a0.ws-us02.gitpod.io/api/projects')
         .then(res => {
             const projectList = res.data.filter(project => 
                 project.project_name.toLowerCase().includes(query.toLowerCase()))
                 setProjects(projectList)
+                
         })
     }, [query])
 
@@ -56,6 +58,7 @@ const ProjectList = () => {
    
         <div className={classes.plRoot}>
                 <TextField placeholder="Search..." className={classes.TextField} onChange={changeHandler} />
+                <p>You currently have {projects.length} Project active</p>
             <div>
                 {projects.map(project => (
                        <Card variant='outlined' className={classes.cardRoot}>

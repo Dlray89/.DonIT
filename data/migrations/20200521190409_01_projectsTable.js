@@ -6,6 +6,8 @@ exports.up = function(knex, Promise) {
       projects.string('project_name').notNullable()
 
       projects.text('details', 400).notNullable()
+
+      projects.boolean('isActive').defaultTo(false)
   })
 };
 

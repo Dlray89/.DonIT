@@ -1,7 +1,8 @@
 import React, { useState, useEffect} from "react"
-import CRUDOps from "../CRUD-OPS/crud_operations"
+import TgCRUDOps from "../CRUD-OPS/TagsCrud"
+import TaskCRUD from "../CRUD-OPS/tasksCRUD"
 import crud_operations from "../CRUD-OPS/crud_operations"
-import { Card, CardHeader,} from "@material-ui/core"
+import { Card, CardHeader, CardContent,} from "@material-ui/core"
 import Modal from "../Components/Modal"
 
 const Projects = props => {
@@ -10,29 +11,58 @@ const Projects = props => {
         id: null,
         project_name:'',
         details: '',
+        isActive:false
         
     }
 
     const [currentProjects, setCurrentProjects] = useState(initialProjects)
+    const [currentTask, setCurrentTasks] = useState([])
     const [currentTags, setCurrentTags] = useState([])
     const [message, setMessage] = useState('')
 
 
     //get request to get all projects
     const getProject = id => {
-        CRUDOps.getProjectById(id)
+        crud_operations.getProjectById(id)
         .then(res => {
             setCurrentProjects(res.data)
             console.log("projects",res.data)
 
             
-            setCurrentTags(res.data.tags)
-            console.log('tags', res.data.tags)
         })
         .catch(err => {
             console.log(err)
         })
     }
+
+    const getTags = id => {
+        TgCRUDOps.getTagById(id)
+        .then(res => {
+            setCurrentTags(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
+    const getTasks = id => {
+        TaskCRUD.getTaskById(id)
+        .then(res => {
+            setCurrentTasks(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        
+    }
+
+    useEffect(() => {
+        getTasks(props.match.params.id)
+    },[props.match.params.id])
+
+    useEffect(() => {
+        getTags(props.match.params.id)
+    },[props.match.params.id])
 
     useEffect(() => {
         getProject(props.match.params.id)
@@ -45,11 +75,13 @@ const Projects = props => {
 
 
     // set up put request here
-    const updateProject = () => {
+    const updateProject = status => {
         var data = {
             id: currentProjects.id,
             project_name: currentProjects.project_name,
             details: currentProjects.details,
+            isActive:status
+
            
            
         }
@@ -57,11 +89,7 @@ const Projects = props => {
         crud_operations.updateProject(currentProjects.id, data)
         .then(res => {
             setCurrentProjects({
-                id: res.data,
-                project_name:res.data,
-                details:res.data,
-                
-              
+                ...currentProjects, isActive: status
             })
             console.log(res.data)
         })
@@ -99,18 +127,24 @@ const Projects = props => {
         <div>
             <Card variant="outlined" >
                 <CardHeader title={currentProjects.project_name} subheader={currentProjects.details} />
-            
+                <p>{currentTask.task_Name}</p>
+                <CardContent>
+                     {currentTags.name}
+                </CardContent>
+               
                 
+               
+ 
             </Card>
             
           <div>
               <Modal updateProject={updateProject} update={update} title={currentProjects.project_name} details={currentProjects.details} onChange={handleChange} />
           </div>
-            <p>{currentTags.name}</p>
+           
            {currentProjects ? (
                <div>
                    <p>Project</p>
-                   <form>
+                   <form key={currentProjects.id}>
                        <div>
                            <p>Project name</p>
                            <input
@@ -131,14 +165,20 @@ const Projects = props => {
                            onChange={handleChange} 
                             />
                        </div>
+                       <div>
+                           <label>
+                               <strong>Status</strong>
+                           </label>
+                           {currentProjects.isActive ? 'COmpleted' : 'Not started'}
+                       </div>
                    </form>
-                   {currentProjects? (
+                   {currentProjects.isActive ? (
                        <button onClick={() => updateProject(false)}>
                         Cancel
                         </button>
                    ) : (
                        <button onClick={() => updateProject(true)} > 
-                       Change
+                       Completed
                        </button>
                    )}
 
