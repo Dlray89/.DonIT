@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
       tasks.increments().unique()
 
 
-      tasks.string('task_Name', 128)
+      tasks.string('task_Name', 128).notNullable()
         //projectKey
       tasks.integer('project_id')
       .unsigned()

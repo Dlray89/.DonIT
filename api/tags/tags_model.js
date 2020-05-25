@@ -48,7 +48,7 @@ function update(id, changes){
     return DB('tags')
     .where('id', id)
     .update(changes)
-    .then(count => (count > 0 ? get(id) : null ))
+    .then(count => (count > 0 ? findById(id) : null ))
 }
 
 function remove(id){

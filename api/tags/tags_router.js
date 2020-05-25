@@ -47,7 +47,7 @@ router.post('/', (req,res) => {
 
 
 //set up PUT request here
-router.put('/', (req,res) => {
+router.put('/:id', (req,res) => {
     const { id } = req.params
     const updateTag = req.body
 

@@ -48,11 +48,11 @@ function update(id, changes){
     return DB('tasks')
     .where('id', id)
     .update(changes)
-    .then(count => (count > 0 ? get(id) : null ))
+    .then(count => (count > 0 ? findById(id) : null ))
 }
 
 function remove(id){
-    return DB.update('tasks')
+    return DB('tasks')
     .where('id', id)
-    .del
+    .del()
 }
