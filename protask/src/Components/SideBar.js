@@ -1,10 +1,13 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { List, ListItem, ListItemText, makeStyles} from "@material-ui/core"
+import LOGO from "../logo/ProHASH.png"
 
 const useStyles = makeStyles((theme) => ({
         sbRoot:{
-           
+           display:'flex',
+           flexDirection:'column',
+           justifyContent:"space-evenly",
             background:"linear-gradient(to right, #000046, #1cb5e0);",
             width:'15%',
             height:'100vh'
@@ -12,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
         listRoot: {
             
             padding:'1%',
-            marginTop:'70%'
         },
         listButton:{
             
@@ -33,7 +35,12 @@ const SideBar = () => {
 
     return(
         <div className={classes.sbRoot}>
-            <div>
+
+        <div style={{textAlign:'center',padding:'1%'}}>
+        <img style={{width:"80%", borderRadius:"50%"}} src={LOGO} />
+        </div>
+
+            <div style={{padding:"1%"}}>
                 <List className={classes.listRoot}>
 
                 <ListItem button className={classes.listButton}>

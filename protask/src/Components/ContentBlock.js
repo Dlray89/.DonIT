@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { makeStyles, Card, CardHeader, CardContent, CardActionArea, Button, Typography, Divider} from "@material-ui/core"
-import ReactWeather from "react-open-weather"
 
 const useStyles = makeStyles((theme) => ({
     dashRoot: {
@@ -45,14 +44,18 @@ const ContentBlock = () => {
 const classes = useStyles()
     return(
         <div className={classes.dashRoot}>
-        <div>
-            <ReactWeather apikey='db2ae29231ee394f350d0d84a50e4e0a
-' forecast='today' cit='detroit' />
-        </div>
+       
         <Card className={classes.mainCard}>
-        
+            <div style={{width:'100%'}}>
+                <Card style={{width:'95%', margin:"0 auto", textAlign:"center"}}>
+                    <CardHeader title='Welcome, username' />
+                    <CardContent>
+                        Welcome to your project management tool
+                    </CardContent>
+                </Card>
+            </div>
 
-
+            <div style={{display:"flex", justifyContent:"space-evenly"}}>
             <Card variant="outlined" color='primary' className={classes.hubCards}>
             <CardHeader title='New Project' subheaderTypographyProps={{color:"white"}} subheader="Get started with a new project today! Crush your goals" />
             <Divider style={{background:"white"}} />
@@ -78,6 +81,7 @@ const classes = useStyles()
                  
                 </CardActionArea>
             </Card>
+            </div>
 
             
 

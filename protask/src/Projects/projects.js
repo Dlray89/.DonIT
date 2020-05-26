@@ -10,6 +10,8 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import HomeIcon from '@material-ui/icons/Home';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from "@material-ui/icons/Done"
+import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircleTwoTone';
+import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
 
 const useStyles = makeStyles((theme) => ({
     mainRoot: {
@@ -190,10 +192,13 @@ const Projects = props => {
 
                     <Link style={{ textDecoration: "none", color: "white" }} to='/projects' ><ArrowBackIcon /></Link>
                     <Link style={{ textDecoration: "none", color: "white" }} to='/' ><HomeIcon /></Link>
-                    <PopUp trigger={<DeleteIcon  />}>
+
+                    
+                    <PopUp contentStyle={{color:"blue"}} trigger={<DeleteIcon  />}>
                             <p style={{color:'black'}}>Are you sure you want to delete?</p>
-                            <button onClick={deleteProject} >Yes</button>
-                            <button>No</button>
+                            <CheckCircleTwoToneIcon onClick={deleteProject} />
+                            <HighlightOffTwoToneIcon />
+                            
                     </PopUp>
                     
                 </div>
