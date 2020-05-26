@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import axios from 'axios'
 import { Card, CardHeader, Button, makeStyles, TextField} from "@material-ui/core"
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
     plRoot:{
@@ -57,7 +58,14 @@ const ProjectList = () => {
     return (
    
         <div className={classes.plRoot}>
-                <TextField placeholder="Search..." className={classes.TextField} onChange={changeHandler} />
+        <Autocomplete
+  id="combo-box-demo"
+  options={projects}
+  getOptionLabel={(option) => option.project_name}
+  style={{ width: 300 }}
+  renderInput={(params) =>  <TextField {...params}  label="Search..." className={classes.TextField} onChange={changeHandler} />}
+/>
+               
                 <p>You currently have {projects.length} Project active</p>
             <div>
                 {projects.map(project => (
