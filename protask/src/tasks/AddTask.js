@@ -52,42 +52,48 @@ const AddTask = () => {
     }
 
     return (
-        <div>
+        <div style={{border:"solid 2px red", width:"100%", padding:'1%', background:"linear-gradient(to right, #000046, #1cb5e0)", textAlign:'center', height:'94vh'}}>
            {submitted ? (
                <div>
-                   <p>Add a tag</p>
-                   <Link to='/addtags'><button onClick={newTask}>
+                   <p style={{color:'white'}}>UP NEXT</p>
+                   <p style={{color:'white'}}>ADD A TAG </p>
+                   <Link to='/addtags'><Button variant='outlined' onClick={newTask}>
                        next: Add a tag
-                       </button></Link>
+                       </Button></Link>
                </div>
            ) : (
-               <div>
-                   <div>
-                       <p>Create new Task</p>
+               <div style={{border:"solid 2px yellow", width:"50%", margin:"0 auto", padding:'1%', background:"white"}}>
+                    <p>Create new Task</p>
+                    <div style={{margin:"2% 0"}}>
                        <TextField
-                       variant="outlined"
-                        type='text'
-                        id='task_Name'
-                        required
-                        value={task.task_Name}
-                        onChange={handleChange}
-                        name='task_Name'
-                        placeholder='Task Name 1'
-                         />
-                   </div>
-                   <div>
-                       <TextField
-                      
-                       variant="outlined"
+                       
+                      style={{width:'50%'}}
+                       
                         type='text'
                         id='project_id'
                         required
                         value={task.project_id}
                         onChange={handleChange}
                         name='project_id'
-                        placeholder="project_id#"
+                        label="project_id"
                          />
                    </div>
+
+                   <div style={{margin:"2% 0"}}>
+                       
+                       <TextField
+                       style={{width:"50%"}}
+                       
+                        type='text'
+                        id='task_Name'
+                        required
+                        value={task.task_Name}
+                        onChange={handleChange}
+                        name='task_Name'
+                        label='Task Name 1'
+                         />
+                   </div>
+                  
                    <div>
                        <Button variant='outlined' onClick={saveTask}>Submit</Button>
                    </div>

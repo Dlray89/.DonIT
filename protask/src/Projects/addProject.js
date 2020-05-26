@@ -133,33 +133,35 @@ const AddProject = () => {
     }
 
     return (
-        <div>
+        <div style={{border:"solid 2px blue", width:"100%", textAlign:'center', height:"93vh", padding:"1%", background:'linear-gradient(to right, #000046, #1cb5e0)'}}>
            {submitted ? (
                <div>
-                    <p>The project id is {project.id}</p>    
-                   
-                   <Link to='/addtasks'><button onClick={newProject}>
+                    <p style={{color:'white'}}>THIS IS YOUR PROJECT-ID: #{project.id}</p>    
+                   <p style={{color:'white'}}>YOU WILL NEED THIS TO ADD A TASK TO GET YOU STARTED!</p>
+                   <Link to='/addtasks'><Button variant='outlined' onClick={newProject}>
                        Next: Add a task
-                       </button></Link>
+                       </Button></Link>
                </div>
            ) : (
-               <div>
+               <div style={{border:"solid 2px red", width:"50%", padding:"1%", margin:"0 auto", background:"white"}}>
                    <div>
                        <p>Create new project</p>
                        <TextField
-                       variant="outlined"
+                       style={{width:"40%", margin:"3% 0"}}
+                       label="Project Name"
                         type='text'
                         id='project_name'
                         required
                         value={project.project_name}
                         onChange={handleChange}
                         name='project_name'
-                        placeholder='Project Name'
+                       
                          />
                    </div>
                    <div>
                        <TextField
                        multiline
+                       style={{width:"45%", marginBottom:"2%"}}
                        rows={7}
                        variant="outlined"
                         type='text'
@@ -168,7 +170,7 @@ const AddProject = () => {
                         value={project.details}
                         onChange={handleChange}
                         name='details'
-                        placeholder="Details of your project"
+                        label="Details of your project"
                          />
                    </div>
                    <div>

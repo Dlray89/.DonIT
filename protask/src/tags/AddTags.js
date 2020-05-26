@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import TagOps from "../CRUD-OPS/TagsCrud"
 import {TextField, Button} from "@material-ui/core"
+import Alert from '@material-ui/lab/Alert';
+
 
 const AddTag = () => {
     const initialTagState = {
@@ -52,17 +54,17 @@ const AddTag = () => {
     }
 
     return (
-        <div>
+        <div style={{border:'solid 2px red', width:"100%", padding:'1%', height:"94vh", background:"linear-gradient(to right, #000046, #1cb5e0)", textAlign:'center'}}>
            {submitted ? (
                <div>
-                   <p>You submitted successfully</p>
-                   <Link to='/projects'><button onClick={newTag}>
-                       Go to Projects
-                       </button></Link>
+                   <Alert style={{width:"30%", margin:'2% auto'}} severity="success">Project was created successfully — Go to projects!</Alert>
+                   <Link to='/projects'><Button variant='outlined' onClick={newTag}>
+                       Project List
+                       </Button></Link>
                </div>
            ) : (
-               <div>
-                   <div>
+               <div style={{border:'solid 2px blue', width:"40%", margin:"0 auto"}}>
+                   <div style={{margin:'2% 0'}}>
                        <p>Create new Tag</p>
                        <TextField
                        variant="outlined"

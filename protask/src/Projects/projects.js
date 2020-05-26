@@ -11,23 +11,26 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
     mainRoot:{
-        border:"solid 2px green",
+        
         width:"100%",
-        padding:"1%"
+        padding:"1%",
+        background:"grey"
     },
     rootCard: {
-        border:"solid 2px red",
+        border:"solid 1px white",
         width:"100%",
-        textAlign:"start-end"
+        textAlign:"start-end",
+        background:"linear-gradient(to right, #000046, #1cb5e0)",
+        color:"white"
     },
     cardTag:{
         display:"flex",
-        justifyContent:"space-evenly",
-        width:"15%",
+        justifyContent:"space-between",
+        width:"12%",
         border:"solid 2px black",
         background:"red",
         color:"white",
-        padding:"0.1%",
+        
         margin:"3% 0"
     },
     tagName:{
@@ -178,19 +181,19 @@ const Projects = props => {
     return (
         <div className={classes.mainRoot}>
             <Card className={classes.rootCard} variant="outlined" >
-                <CardHeader title={currentProjects.project_name} subheader={`ProjectId: ${currentProjects.id}`} />
-                <Divider style={{background:"black"}}  />
+                <CardHeader title={currentProjects.project_name} subheaderTypographyProps={{color:"white"}} subheader={`PROJECT-ID: #${currentProjects.id}`} />
+                <Divider style={{background:"white"}}  />
 
-                <div>
+                <div style={{display:'flex', justifyContent:"space-between", width:"15%", padding:"1%"}}>
                         
-                        <Link to='/projects' ><ArrowBackIcon /></Link>
-                        <Link to='/' ><HomeIcon /></Link>
+                        <Link style={{textDecoration:"none", color:"white"}} to='/projects' ><ArrowBackIcon /></Link>
+                        <Link style={{textDecoration:"none", color:"white"}} to='/' ><HomeIcon /></Link>
                         <DeleteIcon onClick={deleteProject} />
                 </div>
 
-                <Card style={{border:"solid 2px red", width:"40%", margin:' 2% auto', textAlign:'center'}}>
+                <Card style={{border:"solid 1px white", width:"40%", margin:' 2% auto', textAlign:'center', background:'grey', color:'white'}}>
                 <CardHeader title={`Project Details`}/>
-                 <Divider />
+                 <Divider style={{background:"white"}} />
                  <CardContent>
                      <Typography>
                          {currentProjects.details} 
@@ -200,15 +203,15 @@ const Projects = props => {
                 </Card>
                 
                 <CardContent>
-                    <div style={{border:"solid 2px blue", height:"30vh", padding:"1%", display:"flex", justifyContent:"space-evenly", alignContent:"center"}}>
+                    <div style={{ height:"30vh", padding:"1%", display:"flex", justifyContent:"space-evenly", alignContent:"center"}}>
 
-                    <Card style={{border:"solid 1px black", width:"45%", textAlign:"center"}} >
+                    <Card style={{border:"solid 1px white", width:"45%", textAlign:"center", background:"grey", color:"white"}} >
                     <CardHeader title="Projects Tasks" />
 
                         
                         <List >
                             
-                            <Divider />
+                            <Divider style={{background:"white"}} />
                             <ListItem>
                                 
                                 <ListItemText  key={currentTask.project_id}>
@@ -222,9 +225,9 @@ const Projects = props => {
                 </CardActionArea>
                     </Card>
 
-                      <Card style={{border:'solid 2px blue', width:"45%"}}>
+                      <Card style={{border:'solid 1px white', width:"45%", background:"grey", color:"white"}}>
                       <CardHeader title='Journal title goes here' />
-                      <Divider />
+                      <Divider style={{background:"white"}} />
                             <CardContent>Journal Goes here</CardContent>
                               <CardActionArea>
                    
