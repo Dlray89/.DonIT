@@ -7,7 +7,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 const useStyles = makeStyles((theme) => ({
     plRoot:{
         width:'100%',
-        padding:'1%'
+        padding:'1%',
     },
     cardRoot:{
         display:'flex',
@@ -42,7 +42,7 @@ const ProjectList = () => {
 
     useEffect(() => {
         axios
-        .get('https://4000-dd52103a-d061-4a7c-b9b9-87b7fe38ed11.ws-us02.gitpod.io/api/projects')
+        .get('https://4000-cd234cc2-f7d6-44b3-9e43-69ac69f6b0ea.ws-us02.gitpod.io/api/projects')
         .then(res => {
             const projectList = res.data.filter(project => 
                 project.project_name.toLowerCase().includes(query.toLowerCase()))

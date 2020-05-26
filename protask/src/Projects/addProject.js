@@ -133,7 +133,7 @@ const AddProject = () => {
     }
 
     return (
-        <div style={{border:"solid 2px blue", width:"100%", textAlign:'center', height:"93vh", padding:"1%", background:'linear-gradient(to right, #000046, #1cb5e0)'}}>
+        <div style={{width:"100%", textAlign:'center', height:"93vh", padding:"1%", background:'linear-gradient(to right, #000046, #1cb5e0)'}}>
            {submitted ? (
                <div>
                     <p style={{color:'white'}}>THIS IS YOUR PROJECT-ID: #{project.id}</p>    
@@ -143,7 +143,7 @@ const AddProject = () => {
                        </Button></Link>
                </div>
            ) : (
-               <div style={{border:"solid 2px red", width:"50%", padding:"1%", margin:"0 auto", background:"white"}}>
+               <div style={{border:"solid 2px white", width:"50%", padding:"1%", margin:"0 auto", background:"white", background:"grey", color:'white'}}>
                    <div>
                        <p>Create new project</p>
                        <TextField

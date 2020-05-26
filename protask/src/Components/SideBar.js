@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
            justifyContent:"space-evenly",
             background:"linear-gradient(to right, #000046, #1cb5e0);",
             width:'15%',
-            height:'100vh'
+            height:'107vh'
         },
         listRoot: {
             

@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { makeStyles, Card, CardHeader, CardContent, CardActionArea, Button, Typography, Divider} from "@material-ui/core"
+import SettingsBar from "./SettingsBar"
 
 const useStyles = makeStyles((theme) => ({
     dashRoot: {
@@ -44,11 +45,14 @@ const ContentBlock = () => {
 const classes = useStyles()
     return(
         <div className={classes.dashRoot}>
+        <div>
+            <SettingsBar />
+        </div>
        
         <Card className={classes.mainCard}>
             <div style={{width:'100%'}}>
                 <Card style={{width:'95%', margin:"0 auto", textAlign:"center"}}>
-                    <CardHeader title='Welcome, username' />
+                    <CardHeader title='Welcome, David' />
                     <CardContent>
                         Welcome to your project management tool
                     </CardContent>

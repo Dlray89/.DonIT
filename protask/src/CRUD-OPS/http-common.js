@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export default axios.create({
-    baseURL:'https://4000-dd52103a-d061-4a7c-b9b9-87b7fe38ed11.ws-us02.gitpod.io/',
+    baseURL:'https://4000-cd234cc2-f7d6-44b3-9e43-69ac69f6b0ea.ws-us02.gitpod.io/',
     headers: {
         'Content-type' : 'application/json'
     }
