@@ -4,7 +4,7 @@ import PopUp from "reactjs-popup"
 import TgCRUDOps from "../CRUD-OPS/TagsCrud"
 import TaskCRUD from "../CRUD-OPS/tasksCRUD"
 import crud_operations from "../CRUD-OPS/crud_operations"
-import { Button, Card, CardHeader, CardContent, CardActionArea, Typography, Divider, makeStyles, ListItem, List, ListItemText, Chip } from "@material-ui/core"
+import { Button, Card, CardHeader, CardContent, CardActionArea, Typography, Divider, makeStyles, ListItem, List, ListItemText, Chip, TextField } from "@material-ui/core"
 import Modal from "../Components/Modal"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import HomeIcon from '@material-ui/icons/Home';
@@ -12,6 +12,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from "@material-ui/icons/Done"
 import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircleTwoTone';
 import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
+import EditIcon from '@material-ui/icons/Edit';
+import TagsCrud from "../CRUD-OPS/TagsCrud"
 
 const useStyles = makeStyles((theme) => ({
     mainRoot: {
@@ -46,10 +48,9 @@ const useStyles = makeStyles((theme) => ({
 const Projects = props => {
 
     const initialProjects = {
-        id: null,
         project_name: '',
         details: '',
-        isActive: false
+
 
     }
 
@@ -63,7 +64,9 @@ const Projects = props => {
     const [currentProjects, setCurrentProjects] = useState(initialProjects)
     const [currentTask, setCurrentTasks] = useState(initialTaskState)
     const [currentTags, setCurrentTags] = useState([])
+    const [color, setColor] = useState(true)
     const [message, setMessage] = useState('')
+
 
 
     //get request to get all projects
@@ -121,41 +124,38 @@ const Projects = props => {
         setCurrentProjects({ ...currentProjects, [name]: value })
     }
 
-
-    // set up put request here
-    const updateProject = status => {
-        var data = {
-            id: currentProjects.id,
-            project_name: currentProjects.project_name,
-            details: currentProjects.details,
-            isActive: status
-
-
-
-        }
-
-        crud_operations.updateProject(currentProjects.id, data)
-            .then(res => {
-                setCurrentProjects({
-                    ...currentProjects, isActive: status
-                })
-                console.log(res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+    const TasksHandleChange = e => {
+        const { name, value } = e.target
+        setCurrentTasks({ ...currentTask, [name]: value })
     }
 
-    const update = () => {
+
+    // set up put request here for projects
+    const updateProject = e => {
+        e.preventDefault()
+
         crud_operations.updateProject(currentProjects.id, currentProjects)
             .then(res => {
-                console.log("updateCRUD OP funtion", res.data)
-                setMessage('Your project was updated')
+                console.log(res.data)
+                setCurrentProjects(res.data)
             })
-            .catch(err => {
-                console.log(err)
-            })
+            .catch(err => console.log(err))
+            .finally(window.location.reload())
+
     }
+    //set up PUT request here
+    const updateTask = e => {
+        e.preventDefault()
+        TaskCRUD.updateTask(currentTask.id, currentTask)
+            .then(res => {
+                console.log(res.data)
+                setCurrentTasks(res.data)
+            })
+            .catch(err => console.log(`${err}: Something went wrong trying to update you tasks`))
+        // .finally(window.location.reload())
+    }
+
+
 
 
     //set delete project here
@@ -175,6 +175,7 @@ const Projects = props => {
         TgCRUDOps.removeTag(currentTags.id)
             .then(res => {
                 console.log(res.data)
+                props.hissory.push('/projects/:id')
             })
             .catch(err => {
                 console.log(err)
@@ -193,15 +194,80 @@ const Projects = props => {
                     <Link style={{ textDecoration: "none", color: "white" }} to='/projects' ><ArrowBackIcon /></Link>
                     <Link style={{ textDecoration: "none", color: "white" }} to='/' ><HomeIcon /></Link>
 
-                    
-                    <PopUp contentStyle={{color:"blue"}} trigger={<DeleteIcon  />}>
-                            <p style={{color:'black'}}>Are you sure you want to delete?</p>
-                            <CheckCircleTwoToneIcon onClick={deleteProject} />
-                            <HighlightOffTwoToneIcon />
-                            
+
+                    <PopUp contentStyle={{ color: "blue", textAlign: 'center' }} trigger={<DeleteIcon />}>
+                        <p style={{ color: 'black' }}>Are you sure you want to delete?</p>
+                        <CheckCircleTwoToneIcon onClick={deleteProject} />
+                        <HighlightOffTwoToneIcon />
+
                     </PopUp>
-                    
+
+
+                    <PopUp position='bottom left' contentStyle={{ width: '40%', margin: '0', textAlign: 'center' }} trigger={<EditIcon />}>
+                        <div style={{ padding: '1%' }}>
+                            <Typography style={{ color: 'white', background: 'linear-gradient(to right, #000046, #1cb5e0)' }}>Edit your project here</Typography>
+                        </div>
+
+                        <div>
+
+                            <form key={currentProjects.id}>
+                                <div>
+
+                                    <TextField
+                                        style={{ margin: "3% 0", width: "70%" }}
+                                        label='Project Name'
+                                        variant='outlined'
+                                        type='text'
+                                        id='project_name'
+                                        name='project_name'
+                                        value={currentProjects.project_name}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div>
+
+                                    <TextField
+                                        style={{ margin: "3% 0", width: '80%' }}
+                                        multiline
+                                        rows={5}
+                                        variant='outlined'
+                                        label="Project Detail's"
+                                        type='text'
+                                        id='details'
+                                        name='details'
+                                        value={currentProjects.details}
+                                        onChange={handleChange}
+                                    />
+                                    <Typography color='black '>Update Task</Typography>
+                                    <div style={{ border: 'solid 2px lightgrey', display: 'flex', justifyContent: "space-evenly", alignContent: 'center', textAlign: 'center', width: '90%', margin: '0 auto', padding: '1%', background: 'lightgrey' }}>
+
+
+
+                                        <TextField variant='outlined'
+                                            style={{ margin: "3% 0", width: '50%' }}
+                                            label="Task"
+                                            type='text'
+                                            id='task_Name'
+                                            name='task_Name'
+                                            value={currentTask.task_Name}
+                                            onChange={TasksHandleChange} />
+                                        <div style={{ textAlign: 'center', margin: "6% auto" }}>
+                                            <Button variant='outlined' onClick={updateTask}>Save Task</Button>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <Button style={{ background: 'linear-gradient(to right, #000046, #1cb5e0)', color: 'white', marginTop: '3%' }} variant='outlined' onClick={updateProject}>Update</Button>
+
+                            </form>
+                        </div>
+                    </PopUp>
+
                 </div>
+
+
 
                 <Card style={{ border: "solid 1px white", width: "40%", margin: ' 2% auto', textAlign: 'center', background: 'grey', color: 'white' }}>
                     <CardHeader title={`Project Details`} />
@@ -227,13 +293,14 @@ const Projects = props => {
                                 <ListItem>
 
                                     <ListItemText key={currentTask.project_id}>
-                                        {currentTask.project_id}:{currentTask.task_Name}
+                                        {currentTask.task_Name}
                                     </ListItemText>
                                 </ListItem>
                             </List>
                             <CardActionArea>
 
                                 <Button variant='outlined'>View Tasks</Button>
+                                <Button variant='outlined'>Edit Task</Button>
                             </CardActionArea>
                         </Card>
 
@@ -249,12 +316,11 @@ const Projects = props => {
 
                     </div>
 
-                    <div>
+                    <div >
                         <h5>Tags:</h5>
                         <Chip label={currentTags.name}
-                            onClick={deleteTag}
-                            deleteIcon={<DoneIcon />}
-                             />
+                            deleteIcon={<DoneIcon onClick={deleteTag} />}
+                        />
 
                     </div>
                 </CardContent>
@@ -262,65 +328,14 @@ const Projects = props => {
 
 
 
-                <div>
-                    <Modal updateProject={updateProject} update={update} title={currentProjects.project_name} details={currentProjects.details} onChange={handleChange} />
-                </div>
+
 
             </Card>
 
 
 
-            {currentProjects ? (
-                <div>
-                    <p>Project</p>
-                    <form key={currentProjects.id}>
-                        <div>
-                            <p>Project name</p>
-                            <input
-                                type='text'
-                                id='project_name'
-                                name='project_name'
-                                value={currentProjects.project_name}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <p>Details</p>
-                            <input
-                                type='text'
-                                id='details'
-                                name='details'
-                                value={currentProjects.details}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <label>
-                                <strong>Status</strong>
-                            </label>
-                            {currentProjects.isActive ? 'COmpleted' : 'Not started'}
-                        </div>
-                    </form>
-                    {currentProjects.isActive ? (
-                        <button onClick={() => updateProject(false)}>
-                            Cancel
-                        </button>
-                    ) : (
-                            <button onClick={() => updateProject(true)} >
-                                Completed
-                       </button>
-                        )}
 
-                    <button onClick={deleteProject} > Delete </button>
-                    <button onClick={update} >Update</button>
-                    <p>{message}</p>
-                </div>
-            ) : (
-                    <div>
-                        <br />
-                        <p>PLease click on a project</p>
-                    </div>
-                )}
+
         </div>
     )
 }

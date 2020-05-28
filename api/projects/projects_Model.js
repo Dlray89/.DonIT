@@ -18,37 +18,7 @@ return DB("projects")
 }
 
 function findById(id) {
-
-    let query = DB('projects as p')
-
-    if (id) {
-        query.where('p.id', id).first()
-
-        const promises = [query, getProjectTasks(id), getProjectTags(id)]
-
-        return Promise.all(promises).then(function(results) {
-            let [project, tasks, tags ] = results
-            
-
-            if(project) {
-                project.tasks = tasks
-                project.tags = tags
-
-                
-
-                return mapper.projectToBody(project)
-            } else {
-                return null
-            }
-        
-        })
-    } else {
-        return query.then(projects => {
-            return projects.map(project => mapper.projectToBody(project))
-        })
-    }
-
-
+    return DB('projects').where({ id}).first()
 }
 
 function add(project){
@@ -62,8 +32,8 @@ return DB("projects")
 function update(id, changes){
     return DB('projects')
     .where('id', id)
-    .update(changes)
-    .then(count => (count > 0 ? findById(id) : null ))
+    .update(changes, '*')
+    
 }
 
 function remove(id){

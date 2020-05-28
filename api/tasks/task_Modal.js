@@ -47,8 +47,8 @@ return DB("tasks")
 function update(id, changes){
     return DB('tasks')
     .where('id', id)
-    .update(changes)
-    .then(count => (count > 0 ? findById(id) : null ))
+    .update(changes, '*')
+    
 }
 
 function remove(id){

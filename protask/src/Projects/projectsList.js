@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent:"space-between",
         margin:'1% 0',
         padding:'1%',
-        width:"70%"
+        width:"90%"
     },
     Button:{
         
@@ -42,7 +42,7 @@ const ProjectList = () => {
 
     useEffect(() => {
         axios
-        .get('https://4000-cd234cc2-f7d6-44b3-9e43-69ac69f6b0ea.ws-us02.gitpod.io/api/projects')
+        .get('https://4000-b928f559-5901-41f3-ba5b-4c701109a0ae.ws-us02.gitpod.io/api/projects')
         .then(res => {
             const projectList = res.data.filter(project => 
                 project.project_name.toLowerCase().includes(query.toLowerCase()))
