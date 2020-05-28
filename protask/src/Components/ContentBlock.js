@@ -6,16 +6,16 @@ import SettingsBar from "./SettingsBar"
 const useStyles = makeStyles((theme) => ({
     dashRoot: {
       background:"grey",
-      
-        width:'91.4vw',
+      margin:'0',
+        width:'81vw',
         padding:'1%'
     },
     dashHub:{
          border:'solid 2px blue',
     },
     mainCard: {
-        border:'solid 1px white',
-        background:"linear-gradient(to right, #000046, #1cb5e0)",
+        
+        background:"grey",
         display:'flex',
         flexWrap:'wrap',
         justifyContent:'space-evenly',
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         border:'solid 1px white',
         boxSizing:"border-box",
         padding:'1%',
-        background:'grey',
+        background:'linear-gradient(to right, #000046, #1cb5e0)',
         color:"white"
     },
     Links:{
@@ -50,8 +50,8 @@ const classes = useStyles()
         </div>
        
         <Card className={classes.mainCard}>
-            <div style={{width:'100%'}}>
-                <Card style={{width:'95%', margin:"0 auto", textAlign:"center"}}>
+            <div style={{width:'100%', padding:'1%'}}>
+                <Card style={{width:'98%', margin:"0 auto", textAlign:"center",  border:'solid 1px white', background:'linear-gradient(to right, #000046, #1cb5e0)', color:'white'}}>
                     <CardHeader title='Welcome, David' />
                     <CardContent>
                         Welcome to your project management tool
@@ -59,7 +59,7 @@ const classes = useStyles()
                 </Card>
             </div>
 
-            <div style={{display:"flex", justifyContent:"space-evenly"}}>
+            <div style={{display:"flex", justifyContent:"space-evenly",  margin:'2% 0'}}>
             <Card variant="outlined" color='primary' className={classes.hubCards}>
             <CardHeader title='New Project' subheaderTypographyProps={{color:"white"}} subheader="Get started with a new project today! Crush your goals" />
             <Divider style={{background:"white"}} />
@@ -67,7 +67,7 @@ const classes = useStyles()
                 <Typography>Stay on track towards your goals by starting and completing new projects.</Typography>
             </CardContent>
                 <CardActionArea>
-                    <Link to='/addproject' className={classes.Links}><Button variant="outlined" style={{color:'white'}}>New Project</Button></Link>
+                    <Link to='/addproject' className={classes.Links}><Button variant="outlined" style={{color:'white',border:'solid 1px white'}}>New Project</Button></Link>
                    
                 </CardActionArea>
             </Card>
@@ -81,7 +81,7 @@ const classes = useStyles()
                 <Typography>Create and record important, topics, discoveries, errors, and much more</Typography>
             </CardContent>
                 <CardActionArea>
-                    <Button style={{color:'white'}} variant="outlined" color='primary'>New Entry</Button>
+                    <Button style={{color:'white', border:'solid 1px white'}} variant="outlined" color='primary'>New Entry</Button>
                  
                 </CardActionArea>
             </Card>

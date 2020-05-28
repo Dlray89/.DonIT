@@ -17,7 +17,7 @@ import TagsCrud from "../CRUD-OPS/TagsCrud"
 
 const useStyles = makeStyles((theme) => ({
     mainRoot: {
-
+        height:'100vh',
         width: "100%",
         padding: "1%",
         background: "grey"
@@ -245,12 +245,13 @@ const Projects = props => {
 
                                         <TextField variant='outlined'
                                             style={{ margin: "3% 0", width: '50%' }}
-                                            label="Task"
+                                            placeholder="Task"
                                             type='text'
                                             id='task_Name'
                                             name='task_Name'
                                             value={currentTask.task_Name}
-                                            onChange={TasksHandleChange} />
+                                            onChange={TasksHandleChange} 
+                                            multiline/>
                                         <div style={{ textAlign: 'center', margin: "6% auto" }}>
                                             <Button variant='outlined' onClick={updateTask}>Save Task</Button>
                                         </div>
@@ -267,70 +268,72 @@ const Projects = props => {
 
                 </div>
 
+               
 
 
-                <Card style={{ border: "solid 1px white", width: "40%", margin: ' 2% auto', textAlign: 'center', background: 'grey', color: 'white' }}>
+
+                <div style={{display:'flex', justifyContent:'space-evenly', padding:'1%'}}>
+                  
+                <Card style={{width: "35%", textAlign: 'center', background: 'grey', color: 'white', border:'solid 1px white' }}>
                     <CardHeader title={`Project Details`} />
-                    <Divider style={{ background: "white" }} />
+                    <Divider style={{width:'40%', background:'white', margin:'0 auto'}}  />
+                 
                     <CardContent>
                         <Typography>
                             {currentProjects.details}
                         </Typography>
                     </CardContent>
 
+
+                    <List >
+                        
+
+                        <Divider style={{ background: "white", textAlign:'center' }} />
+                        <h3>Project Tasks</h3>
+                        <Divider style={{width:'35%', background:'white', margin:'0 auto'}}  />
+                        <ListItem style={{textAlign:'center'}}>
+
+                            <ListItemText key={currentTask.project_id}>
+                                {currentTask.task_Name}
+                            </ListItemText>
+                        </ListItem>
+                    </List>
+                    <CardActionArea>
+
+                        <Button style={{background:'linear-gradient(to right, #000046, #1cb5e0)', color:'white'}} variant='outlined'>View Tasks</Button>
+
+                    </CardActionArea>
                 </Card>
-
-                <CardContent>
-                    <div style={{ height: "30vh", padding: "1%", display: "flex", justifyContent: "space-evenly", alignContent: "center" }}>
-
-                        <Card style={{ border: "solid 1px white", width: "45%", textAlign: "center", background: "grey", color: "white" }} >
-                            <CardHeader title="Projects Tasks" />
+               
 
 
-                            <List >
 
-                                <Divider style={{ background: "white" }} />
-                                <ListItem>
+               <Divider style={{background:'red'}} orientation='vertical' />
+                
 
-                                    <ListItemText key={currentTask.project_id}>
-                                        {currentTask.task_Name}
-                                    </ListItemText>
-                                </ListItem>
-                            </List>
-                            <CardActionArea>
 
-                                <Button variant='outlined'>View Tasks</Button>
-                                <Button variant='outlined'>Edit Task</Button>
-                            </CardActionArea>
-                        </Card>
 
-                        <Card style={{ border: 'solid 1px white', width: "45%", background: "grey", color: "white" }}>
-                            <CardHeader title='Journal title goes here' />
-                            <Divider style={{ background: "white" }} />
-                            <CardContent>Journal Goes here</CardContent>
-                            <CardActionArea>
+                    <Card style={{ border: 'solid 1px white', width: "45%", background: "grey", color: "white", textAlign:'center' }}>
+                        <CardHeader title='Journal' subheader='A place where you can keep your thoughts discovers and issues' />
+                        <Divider style={{ background: "white" }} />
+                        <CardContent>Journal Goes here</CardContent>
+                        <CardActionArea>
 
-                                <Button variant='outlined'>View Journal's</Button>
-                            </CardActionArea>
-                        </Card>
+                            <Button style={{background:'linear-gradient(to right, #000046, #1cb5e0)', color:'white'}} variant='outlined'>View Journal's</Button>
+                        </CardActionArea>
+                    </Card>
 
-                    </div>
+                </div>
+           
 
-                    <div >
-                        <h5>Tags:</h5>
-                        <Chip label={currentTags.name}
-                            deleteIcon={<DoneIcon onClick={deleteTag} />}
-                        />
-
-                    </div>
-                </CardContent>
                 <Divider />
-
-
-
-
-
-            </Card>
+                <div style={{width:'60%', padding:"1%"}}>
+                    <h5>Tags:</h5>
+                    <Chip label={currentTags.name}
+                        deleteIcon={<DoneIcon onClick={deleteTag} />}
+                    />
+                    </div>
+                </Card>
 
 
 

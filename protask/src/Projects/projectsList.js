@@ -1,33 +1,38 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import axios from 'axios'
-import { Card, CardHeader, Button, makeStyles, TextField} from "@material-ui/core"
+import { Card, CardHeader, Button, makeStyles, TextField } from "@material-ui/core"
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+
 const useStyles = makeStyles((theme) => ({
-    plRoot:{
-        width:'100%',
-        padding:'1%',
+    plRoot: {
+        width: '100%',
+        padding: '1%',
+        background:'grey'
     },
-    cardRoot:{
-        display:'flex',
-        justifyContent:"space-between",
-        margin:'1% 0',
-        padding:'1%',
-        width:"90%"
+    cardRoot: {
+        display: 'flex',
+        justifyContent: "space-between",
+        margin: '1% 0',
+        padding: '1%',
+        width: "90%",
+        background:'linear-gradient(to right, #000046, #1cb5e0)',
+        color:'white'
     },
-    Button:{
+    Button: {
+        background:"white"
+    },
+    btnRoot: {
+
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: "space-evenly",
         
-    },
-    btnRoot:{
-        
-        display:'flex',
-        flexDirection:'column',
-        justifyContent:"space-evenly"
 
     },
-    TextField:{
-        width:'100%'
+    TextField: {
+        width: '100%'
     }
 }))
 
@@ -42,13 +47,13 @@ const ProjectList = () => {
 
     useEffect(() => {
         axios
-        .get('https://4000-b928f559-5901-41f3-ba5b-4c701109a0ae.ws-us02.gitpod.io/api/projects')
-        .then(res => {
-            const projectList = res.data.filter(project => 
-                project.project_name.toLowerCase().includes(query.toLowerCase()))
+            .get('https://4000-ca638cf8-a649-4c7d-8baa-569dfa90f906.ws-us02.gitpod.io/api/projects')
+            .then(res => {
+                const projectList = res.data.filter(project =>
+                    project.project_name.toLowerCase().includes(query.toLowerCase()))
                 setProjects(projectList)
-                
-        })
+
+            })
     }, [query])
 
     const changeHandler = e => {
@@ -56,33 +61,48 @@ const ProjectList = () => {
     }
 
     return (
-   
+
         <div className={classes.plRoot}>
-        <Autocomplete
-  id="combo-box-demo"
-  options={projects}
-  getOptionLabel={(option) => option.project_name}
-  style={{ width: 300 }}
-  renderInput={(params) =>  <TextField {...params}  label="Search..." className={classes.TextField} onChange={changeHandler} />}
-/>
+
+            <div>
+                <div style={{width: '30%' }}>
+                    <Autocomplete
+                        id="combo-box-demo"
+                        options={projects}
+                        getOptionLabel={(option) => option.project_name}
+                        style={{ width: 300 }}
+                        renderInput={(params) => <TextField {...params} label="Search..." className={classes.TextField} onChange={changeHandler} />}
+                    />
+                </div>
                
-                <p>You currently have {projects.length} Project active</p>
+            </div>
+
+            <div style={{display: 'flex', justifyContent: "space-between", alignContent: 'center', width: '92%' }}>
+                <div style={{color:'white'}}>
+                     <p>You currently have {projects.length} Project active</p>
+                </div>
+                 <div style={{width: '15%', textAlign: 'center' }}>
+                    <Link to='/addproject'><Button variant='contained' style={{background:'linear-gradient(to right, #000046, #1cb5e0)', color:"white"}} >New Project</Button></Link>
+                </div>
+            </div>
+
+           
             <div>
                 {projects.map(project => (
-                       <Card variant='outlined' className={classes.cardRoot}>
-                           <CardHeader style={{display:'flex'}} title={project.project_name} subheader={project.details} />
-                        
-                           
+                    <Card variant='outlined' className={classes.cardRoot}>
+                        <CardHeader subheaderTypographyProps={{color:'white'}} style={{ display: 'flex' }} title={project.project_name} subheader={project.details} />
+
+
 
                         <div className={classes.btnRoot}>
-                          <Link to={`/projects/${project.id}`}> <Button variant='outlined' className={classes.Button}>View Project</Button></Link>
+                            <Link to={`/projects/${project.id}`}> <Button variant='outlined' className={classes.Button}>View Project</Button></Link>
 
-                           </div>
-                           
-                       </Card>
+                        </div>
+
+                    </Card>
                 ))}
-               
-             
+
+
             </div>
 
         </div>

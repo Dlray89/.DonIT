@@ -54,18 +54,18 @@ const AddTag = () => {
     }
 
     return (
-        <div style={{border:'solid 2px red', width:"100%", padding:'1%', height:"94vh", background:"linear-gradient(to right, #000046, #1cb5e0)", textAlign:'center'}}>
+        <div style={{width:"100%", padding:'1%', height:"94vh", background:"linear-gradient(to right, #000046, #1cb5e0)", textAlign:'center'}}>
            {submitted ? (
                <div>
                    <Alert style={{width:"30%", margin:'2% auto'}} severity="success">Project was created successfully — Go to projects!</Alert>
-                   <Link to='/projects'><Button variant='outlined' onClick={newTag}>
+                   <Link to='/projects'><Button style={{color:'white', border:'solid 1px white'}} variant='outlined' onClick={newTag}>
                        Project List
                        </Button></Link>
                </div>
            ) : (
-               <div style={{border:'solid 2px blue', width:"40%", margin:"0 auto"}}>
+               <div style={{border:'solid 2px white', width:"40%", margin:"8% auto"}}>
                    <div style={{margin:'2% 0'}}>
-                       <p>Create new Tag</p>
+                       <p style={{color:'white'}}>Create new Tag</p>
                        <TextField
                        variant="outlined"
                         type='text'
@@ -74,14 +74,20 @@ const AddTag = () => {
                         value={tag.name}
                         onChange={handleChange}
                         name='name'
-                        placeholder='Tag name'
+                        label='Tag name'
+                        InputLabelProps={{
+                            style: {
+                                color:'white'
+                            }
+                        }}
                          />
                    </div>
                    <div>
                       
                    </div>
                    <div>
-                       <Button variant='outlined' onClick={saveTag}>Submit</Button>
+                       <Button style={{color:'white', border:'solid 1px white'}} variant='outlined' onClick={saveTag}>Submit</Button>
+                       <Link to='/'><Button style={{color:'white', border:'solid 1px white'}}>Cancel</Button></Link>
                    </div>
                </div>
            )}

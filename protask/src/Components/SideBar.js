@@ -7,10 +7,12 @@ const useStyles = makeStyles((theme) => ({
         sbRoot:{
            display:'flex',
            flexDirection:'column',
-           justifyContent:"space-evenly",
-            background:"linear-gradient(to right, #000046, #1cb5e0);",
+           
+            background:"linear-gradient(to right, #000046, #1cb5e0)",
             width:'15%',
-            height:'107vh'
+            height:'120vh',
+           
+            padding:'1%'
         },
         listRoot: {
             
@@ -36,11 +38,11 @@ const SideBar = () => {
     return(
         <div className={classes.sbRoot}>
 
-        <div style={{textAlign:'center',padding:'1%'}}>
+        <div style={{textAlign:'center',padding:'1%', margin:'10% 0',}}>
         <img style={{width:"80%", borderRadius:"50%"}} src={LOGO} />
         </div>
 
-            <div style={{padding:"1%"}}>
+            <div style={{padding:"1%", marginTop:"5%"}}>
                 <List className={classes.listRoot}>
 
                 <ListItem button className={classes.listButton}>

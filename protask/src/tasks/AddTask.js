@@ -52,18 +52,18 @@ const AddTask = () => {
     }
 
     return (
-        <div style={{border:"solid 2px red", width:"100%", padding:'1%', background:"linear-gradient(to right, #000046, #1cb5e0)", textAlign:'center', height:'94vh'}}>
+        <div style={{width:"100%", padding:'1%', background:"grey", textAlign:'center', height:'94vh'}}>
            {submitted ? (
                <div>
                    <p style={{color:'white'}}>UP NEXT</p>
                    <p style={{color:'white'}}>ADD A TAG </p>
-                   <Link to='/addtags'><Button variant='outlined' onClick={newTask}>
+                   <Link to='/addtags'><Button style={{color:'white', border:'solid 1px white'}} variant='outlined' onClick={newTask}>
                        next: Add a tag
                        </Button></Link>
                </div>
            ) : (
-               <div style={{border:"solid 2px yellow", width:"50%", margin:"0 auto", padding:'1%', background:"white"}}>
-                    <p>Create new Task</p>
+               <div style={{border:"solid 1px white", width:"50%", margin:"8% auto", padding:'1%', background:"linear-gradient(to right, #000046, #1cb5e0)"}}>
+                    <p style={{color:'white'}}>Create new Task</p>
                     <div style={{margin:"2% 0"}}>
                        <TextField
                        
@@ -76,6 +76,9 @@ const AddTask = () => {
                         onChange={handleChange}
                         name='project_id'
                         label="project_id"
+                        InputLabelProps={{
+                            style:{color:'white'}
+                        }}
                          />
                    </div>
 
@@ -90,12 +93,16 @@ const AddTask = () => {
                         value={task.task_Name}
                         onChange={handleChange}
                         name='task_Name'
-                        label='Task Name 1'
+                        label='Task Name'
+                        InputLabelProps={{
+                            style:{color:'white'}
+                        }}
                          />
                    </div>
                   
                    <div>
-                       <Button variant='outlined' onClick={saveTask}>Submit</Button>
+                       <Button style={{color:'white', border:'solid 1px white'}} variant='outlined' onClick={saveTask}>Submit</Button>
+                       <Link to='/'><Button style={{color:'white', border:'solid 1px white'}}>Cancel</Button></Link>
                    </div>
                </div>
            )}
