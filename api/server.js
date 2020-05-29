@@ -6,6 +6,8 @@ const cors = require("cors")
 const session = require("cookie-session")
 
 
+const Restricted = require('../auth/Restricted')
+
 //connect server to express
 const server = express()
 
@@ -14,7 +16,7 @@ const projectRouter = require('./projects/projects_Router')
 const taskRouter = require('./tasks/task_router')
 const tagRouter = require('./tags/tags_router')
 const journalRouter = require('./Journal/Journal-Router')
-const userRouter = require('./users/user-router')
+const userRouter = require('./users/userRouter')
 
 
 const ExpiryDate = new Date(Date.now() + 60 * 60 * 100)// 1 hour

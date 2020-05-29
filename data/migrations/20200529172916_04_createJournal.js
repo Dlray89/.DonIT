@@ -16,10 +16,10 @@ exports.up = function(knex) {
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
 
-        journal.foreign('project_id')
+        // journal.foreign('project_id')
   })
 };
 
 exports.down = function(knex) {
-  
+  return knex.schema.dropTableIfExists('journals')
 };
