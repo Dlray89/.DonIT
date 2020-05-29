@@ -197,7 +197,7 @@ const Projects = props => {
         TgCRUDOps.removeTag(currentTags.id)
             .then(res => {
                 console.log(res.data)
-                props.hissory.push('/projects/:id')
+                props.history.push('/projects/:id')
             })
             .catch(err => {
                 console.log(err)
@@ -356,11 +356,12 @@ const Projects = props => {
                 </div>
            
 
-                <Divider />
-                <div style={{width:'60%', padding:"1%"}}>
+                <Divider  />
+                <div  style={{width:'60%', padding:"1%"}}>
                     <h5>Tags:</h5>
                     <Chip label={currentTags.name}
-                        deleteIcon={<DoneIcon onClick={deleteTag} />}
+                       deleteIcon={<DeleteIcon />}
+                        onDelete={deleteTag}
                     />
                     </div>
                 </Card>
