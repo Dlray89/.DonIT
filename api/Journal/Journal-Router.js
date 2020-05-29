@@ -54,6 +54,19 @@ router.put('/:id', (req, res) => {
     })
 })
 
+router.delete('/:id', (req,res) => {
+    const { id } = req.params
+
+    db
+    .remove(id)
+    .then(delJournal => {
+        res.status(200).json(delJournal)
+    })
+    .catch(err => {
+        res.status(500).json({errorMessage: `${err}: Sorry something happened! We couldn't delete your journal`})
+    })
+})
+
 
 
 module.exports = router
