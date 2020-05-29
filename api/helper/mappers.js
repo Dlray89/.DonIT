@@ -21,23 +21,15 @@ function projectToBody(project) {
 
     if(project.tasks) {
         result.tasks = project.tasks.map(tasks => ({
-            ...tasks
+            ...tasks,
         }))
     }
-
-    if(project.tags) {
-        result.tags = project.tags.map(tags => ({
-            ...tags
-        }))
-    }
-
-
     return result
 }
 
 function taskToBody(task) {
     return {
-        ...task
+        ...task,
     }
 }
 

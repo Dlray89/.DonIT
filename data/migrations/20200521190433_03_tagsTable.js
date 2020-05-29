@@ -10,10 +10,16 @@ exports.up = function(knex) {
       .notNullable()
       .references('id')
       .inTable('projects')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE')
 
       
-
-      tags.foreign('project_id')
+      //Created_At
+        tags.timestamp('created_at')
+        // Updated_At
+        tags.timestamp('updated_at')
+        
+        tags.foreign('project_id')
 
   })
 };

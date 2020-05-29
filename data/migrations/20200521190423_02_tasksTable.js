@@ -9,9 +9,12 @@ exports.up = function(knex, Promise) {
       tasks.integer('project_id')
       .unsigned()
       .notNullable()
-      .references('id')
-      .inTable('projects')
-      .unique()
+
+       // Created_At
+        tasks.timestamp('created_at').defaultTo(knex.fn.now())
+        // Updated_At
+        tasks.timestamp('updated_at').defaultTo(knex.fn.now())
+      
 
       tasks
       .foreign('project_id')

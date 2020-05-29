@@ -302,6 +302,8 @@ const Projects = props => {
 
                         <Button style={{background:'linear-gradient(to right, #000046, #1cb5e0)', color:'white'}} variant='outlined'>View Tasks</Button>
 
+                        <Link to={`${currentTask.id}/tasks`}><Button>See Tasks</Button></Link>
+
                     </CardActionArea>
                 </Card>
                

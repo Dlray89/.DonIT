@@ -8,6 +8,13 @@ exports.up = function(knex, Promise) {
       projects.text('details', 400).notNullable()
 
       projects.boolean('isActive').defaultTo(false)
+
+     
+   
+        // Created_At
+        projects.timestamp('created_at').defaultTo(knex.fn.now())
+        // Updated_At
+        projects.timestamp('updated_at').defaultTo(knex.fn.now())
   })
 };
 

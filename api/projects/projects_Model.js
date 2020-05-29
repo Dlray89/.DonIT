@@ -5,6 +5,7 @@ const mapper = require("../helper/mappers")
 module.exports = {
     find,
     findById,
+    findTask,
     add,
     remove,
     update,
@@ -17,14 +18,44 @@ function find(){
 return DB("projects")
 }
 
-function findById(id) {
-    return DB('projects').where({ id}).first()
+async function findById(id) {
+    let query = DB('projects as p')
+
+ if (id) {
+    query.where('p.id', id).first()
+
+    const promises = [query, getProjectTasks(id)]
+
+    let results = await Promise.all(promises)
+     let [project, tasks] = results
+     if (project, tasks) {
+        //  project.tasks = tasks
+             return mapper.projectToBody(project);
+     }
+     else {
+         return null;
+     }
+} else {
+    const projects = await query
+     return projects.map(project => mapper.taskToBody(project))
+}
 }
 
-function add(project){
-return DB("projects")
-.insert(project, 'id')
-.then(ids => ({ id: ids[0]}))
+function findTask(id) {
+    return DB('projects')
+    .join('tasks', 'tasks.id', 'tasks.project_id')
+    .select(
+        'tasks.id',
+        'tasks.task_Name',
+        'tasks.project_id',
+    )
+    .where('project_id', id)
+}
+
+async function add(project){
+    const ids = await DB("projects")
+        .insert(project, 'id')
+    return ({ id: ids[0] })
 }
 
 
@@ -42,14 +73,14 @@ function remove(id){
     .del()
 }
 
-function getProjectTasks(projectId) {
-    return DB('tasks')
-    .where('project_id', projectId)
-    .then(tasks => tasks.map(task => mapper.taskToBody(task)))
+async function getProjectTasks(projectId) {
+    const tasks = await DB('tasks')
+        .where('project_id', projectId)
+    return tasks.map(task => mapper.taskToBody(task))
 }
 
-function getProjectTags(projectId){
-    return DB('tags')
-    .where('project_id', projectId) 
-    .then(tags => tags.map(tag => mapper.tagsToBody(tag)) )
+async function getProjectTags(projectId){
+    const tags = await DB('tags')
+        .where('project_id', projectId)
+    return tags.map(tag => mapper.tagsToBody(tag))
 }

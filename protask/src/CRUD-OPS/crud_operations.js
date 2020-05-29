@@ -8,6 +8,10 @@ const getProjectById = id => {
     return http.get(`/api/projects/${id}`)
 }
 
+const getProjectsTasks = id => {
+    return http.get(`/api/projects/${id}/tasks`)
+}
+
 const createProject = data => {
     return http.post('/api/projects', data)
 }
@@ -22,6 +26,7 @@ const removeProject = id => {
 
 export default {
     getAllProjects,
+    getProjectsTasks,
     getProjectById,
     createProject,
     updateProject,

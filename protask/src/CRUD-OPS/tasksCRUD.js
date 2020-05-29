@@ -20,8 +20,13 @@ const removeTask = id => {
     return http.delete(`/api/tasks/${id}`)
 }
 
+
+const getProjectsTasks = id => {
+    return http.get(`/${id}/tasks`)
+}
 export default {
     getAllTasks,
+    getProjectsTasks,
     getTaskById,
     createTask,
     updateTask,

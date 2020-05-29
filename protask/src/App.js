@@ -5,6 +5,7 @@ import ProjectPage from './Pages/ProjectPage'
 import AddProject from "./Projects/addProject"
 import AddTask from "./tasks/AddTask"
 import AddTags from "./tags/AddTags"
+import ProjectTask from "./tasks/taksList"
 import Project from "./Projects/projects"
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/projects/:id" component={Project}  />
         <Route exact path="/addtasks" component={AddTask} />
         <Route exact path="/addtags" component={AddTags} />
+        <Route exact path="/projects/:id/tasks" component={ProjectTask} />
         
         
     </Switch>
