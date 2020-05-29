@@ -4,6 +4,7 @@ import PopUp from "reactjs-popup"
 import TgCRUDOps from "../CRUD-OPS/TagsCrud"
 import TaskCRUD from "../CRUD-OPS/tasksCRUD"
 import crud_operations from "../CRUD-OPS/crud_operations"
+import JournalCRUD from "../CRUD-OPS/JournalCRUD"
 import { Button, Card, CardHeader, CardContent, CardActionArea, Typography, Divider, makeStyles, ListItem, List, ListItemText, Chip, TextField } from "@material-ui/core"
 import Modal from "../Components/Modal"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -60,10 +61,18 @@ const Projects = props => {
         project_id: null
     }
 
+    const initialJournalState = {
+        id: null,
+        title:'',
+        journal_content:'',
+        project_id: null
+    }
+
     const classes = useStyles()
     const [currentProjects, setCurrentProjects] = useState(initialProjects)
     const [currentTask, setCurrentTasks] = useState(initialTaskState)
     const [currentTags, setCurrentTags] = useState([])
+    const [currentJournal, setCurrentJournal] = useState(initialJournalState)
     const [color, setColor] = useState(true)
     const [message, setMessage] = useState('')
 
@@ -103,6 +112,19 @@ const Projects = props => {
             })
 
     }
+
+    const getJournal = id => {
+        JournalCRUD.getJournalById(id)
+        .then(res => {
+            setCurrentJournal(res.data)
+            console.log("journal data", res.data)
+        })
+        .catch(err => console.log(err))
+    }
+
+    useEffect(() => {
+        getJournal(props.match.params.id)
+    }, [props.match.params.id])
 
     useEffect(() => {
         getTasks(props.match.params.id)
@@ -318,7 +340,13 @@ const Projects = props => {
                     <Card style={{ border: 'solid 1px white', width: "45%", background: "grey", color: "white", textAlign:'center' }}>
                         <CardHeader title='Journal' subheader='A place where you can keep your thoughts discovers and issues' />
                         <Divider style={{ background: "white" }} />
-                        <CardContent>Journal Goes here</CardContent>
+                        <CardContent>
+                            <div>
+                                <Typography>Title: {currentJournal.title}</Typography>
+                                <Typography>{currentJournal.journal_content}</Typography>
+                            </div>
+                        
+                        </CardContent>
                         <CardActionArea>
 
                             <Button style={{background:'linear-gradient(to right, #000046, #1cb5e0)', color:'white'}} variant='outlined'>View Journal's</Button>
