@@ -44,7 +44,7 @@ server.use('/api/projects', projectRouter)
 server.use('/api/tasks', taskRouter)
 server.use('/api/tags', tagRouter)
 server.use('/api/journals', journalRouter)
-server.use('/api/users', userRouter)
+server.use('/api/login', userRouter)
 
 server.get('/api/testing', (req,res) => {
     res.status(200).json({message: `Your server in now up and running`})
