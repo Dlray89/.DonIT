@@ -14,6 +14,7 @@ const projectRouter = require('./projects/projects_Router')
 const taskRouter = require('./tasks/task_router')
 const tagRouter = require('./tags/tags_router')
 const journalRouter = require('./Journal/Journal-Router')
+const userRouter = require('./users/user-router')
 
 
 const ExpiryDate = new Date(Date.now() + 60 * 60 * 100)// 1 hour
@@ -41,6 +42,7 @@ server.use('/api/projects', projectRouter)
 server.use('/api/tasks', taskRouter)
 server.use('/api/tags', tagRouter)
 server.use('/api/journals', journalRouter)
+server.use('/api/users', userRouter)
 
 server.get('/api/testing', (req,res) => {
     res.status(200).json({message: `Your server in now up and running`})
