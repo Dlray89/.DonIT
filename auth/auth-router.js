@@ -32,13 +32,15 @@ router.post("/login", (req, res) => {
   const { username, password } = req.body;
 
   usersDB
-    .findBy({ username }).first()
+    .findBy({ username })
+    .first()
     .then(user => {
-      if (user && bcrypt.compareSync(password, user.password)) {
+      if (user && bcrypt.hashSync(password, user.password)) {
         const token = generateToken(user);//get a token
 
         res.status(200).json({
           message: `welcome ${user.username}`,
+          id: user.id,
           token,//send token
         });
       } else {
@@ -55,11 +57,11 @@ function generateToken(user) {
         username: user.username
     }
 
-    const secret = process.env.JWT_SECRET || "is it safe"
+    // const secret = process.env.JWT_SECRET || "is it safe"
     const options = {
         expiresIn: "1h",
     }
-    return jwt.sign(payload, secret, options)
+    return jwt.sign(payload, options)
 }
 
 
