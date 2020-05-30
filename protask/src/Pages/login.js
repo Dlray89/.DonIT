@@ -5,7 +5,7 @@ import {axiosWithAuth} from "../utils/axiosWithAuth"
 export default class Login extends React.Component {
     state = {
         credentials: {
-            email:'',
+            username:'',
             password:''
         }
     }
@@ -24,7 +24,7 @@ export default class Login extends React.Component {
         e.preventDefault()
 
         axiosWithAuth()
-        .post('/api/login')
+        .post('/api/auth/login')
         .then(res => {
             window.localStorage.setItem('token', res.data.payload)
 
@@ -43,12 +43,11 @@ export default class Login extends React.Component {
                             <div>
                                 <input
                                  required
-                                 id='email'
-                                 label='email'
-                                 defaultValue='email'
+                                 id='username'
+                                 label='username'
                                  type='text'
-                                 name='email'
-                                 value={this.state.credentials.email}
+                                 name='username'
+                                 value={this.state.credentials.username}
                                  onChange={this.ChangeHandler}
                                    />
                             </div>
@@ -58,7 +57,7 @@ export default class Login extends React.Component {
                                     required
                                  id='password'
                                  label='password'
-                                 defaultValue='password'
+                             
                                  type='text'
                                  name='password'
                                  value={this.state.credentials.password}

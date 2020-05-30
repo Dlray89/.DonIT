@@ -1,5 +1,6 @@
 
 const db = require('../../knex-Config/db.config')
+
 module.exports = {
     find,
     findBy,
@@ -8,23 +9,19 @@ module.exports = {
 }
 
 function find() {
-    return DB('users')
-    .select('id', 'username')
+    return db('users')
 }
 
 function findBy(filter) {
-    return DB('users')
-    .where(filter)
+    return db('users').where(filter)
 }
 
 function findById(id) {
-    return DB('users')
-    .where({ id })
-    .first()
+    return db('users').where({ id }).first()
 }
 
 async function add(user) {
-    const { id } = await DB('users')
+    const [id ] = await db('users')
     .insert(user, 'id')
 
     return findById(id)

@@ -17,11 +17,13 @@ const taskRouter = require('./tasks/task_router')
 const tagRouter = require('./tags/tags_router')
 const journalRouter = require('./Journal/Journal-Router')
 const userRouter = require('./users/userRouter')
+const authRouter = require('../auth/auth-router')
+
 
 
 const ExpiryDate = new Date(Date.now() + 60 * 60 * 100)// 1 hour
 
-//use middlewear here
+//use middlewear her
 server.set('trust-poxy', 1)
 server.use(session({
     name: "RandomSessionName",
@@ -44,7 +46,8 @@ server.use('/api/projects', projectRouter)
 server.use('/api/tasks', taskRouter)
 server.use('/api/tags', tagRouter)
 server.use('/api/journals', journalRouter)
-server.use('/api/login', userRouter)
+server.use('/api/users', Restricted, userRouter)
+server.use('/api/auth', authRouter)
 
 server.get('/api/testing', (req,res) => {
     res.status(200).json({message: `Your server in now up and running`})
