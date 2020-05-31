@@ -3,15 +3,15 @@ import axios from 'axios'
 
 
 export const axiosWithAuth = () => {
+    
     const token = localStorage.getItem('token')
 
 
     return axios.create({
         headers: {
-            Authorization: token,
-            'Content-type' : 'application/json'
+            Authorization: token
         },
-        baseURL:'https://4000-c4117731-c249-4f95-994b-ed305164102a.ws-us02.gitpod.io/'
+        baseURL:'https://4000-c43c803a-0ccb-44a5-b1b3-998398b4ceca.ws-us02.gitpod.io/'
     
     })
     

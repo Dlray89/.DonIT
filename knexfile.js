@@ -5,7 +5,7 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './data/Protask.Project.db'
+      filename: './data/protask.Database.db'
     },
     useNullAsDefault: true,
     migrations: {

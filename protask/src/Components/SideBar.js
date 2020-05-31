@@ -47,7 +47,7 @@ const SideBar = () => {
 
                 <ListItem button className={classes.listButton}>
                         <ListItemText className={classes.listText}>
-                            <Link to="/" className={classes.listLink}>Home</Link>
+                            <Link to="/dashboard" className={classes.listLink}>Home</Link>
                         </ListItemText>
                     </ListItem>
 

@@ -8,6 +8,7 @@ import AddTags from "./tags/AddTags"
 import ProjectTask from "./tasks/taksList"
 import Project from "./Projects/projects"
 import Login from "./Pages/login"
+import Register from "./Pages/Register"
 import PrivateRoute from './utils/privateRoute'
 
 
@@ -21,7 +22,11 @@ function App() {
     <div style={{display:'flex'}} className="App">
     
     <Switch>  
+        
         <Route exact path='/' component={Login}   />
+        
+        <Route exact path='/register' component={Register}  />
+        <Route exact path='/dashboard' component={Dashboard}   />
         <Route exact path="/projects" component={ProjectPage} />
         <Route exact path="/addproject" component={AddProject} />
         <Route exact path="/projects/:id" component={Project}  />
@@ -29,7 +34,7 @@ function App() {
         <Route exact path="/addtags" component={AddTags} />
         <Route exact path="/projects/:id/tasks" component={ProjectTask} />
 
-        <PrivateRoute exact path='/dashboard' component={Dashboard}   />
+        
         
     </Switch>
     </div>

@@ -1,36 +1,27 @@
-
-const db = require('../../knex-Config/db.config')
+const userDb = require('../../knex-Config/db.config')
 
 module.exports = {
     find,
     findBy,
     findById,
-    findByUsername,
-    add,
+    add
 }
 
 function find() {
-    return db('users')
+    return userDb('users').select('id', 'username')
 }
 
 function findBy(filter) {
-    return db('users')
-    .where(filter)
+    return userDb('users').where(filter)
 }
 
 function findById(id) {
-    return db('users').where({ id }).first()
+    return userDb('users').where({ id }).first()
 }
 
-function findByUsername(user) {
-    return db('users').where({ username }).first()
-}
-
-function add(user) {
-    return db('users')
+async function add(user){
+    const [id] = await userDb('users')
     .insert(user, 'id')
-    .then(([ id ]) => {
-        return this.findById(id)
-    })
-}
 
+    return findById(id)
+}

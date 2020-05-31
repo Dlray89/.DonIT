@@ -1,68 +1,63 @@
-const bcrypt = require("bcryptjs");
-const router = require("express").Router();
-const usersDB = require("../api/users/userModel");
-const jwt = require("jsonwebtoken")
+const Router = require('express').Router()
+const bcrpyt = require('bcryptjs')
+const JWT = require('jsonwebtoken')
+const AuhtData = require('../api/users/userModel')
 
-router.post("/register", (req, res) => {
-  const userInfo = req.body;
+Router.post('/register', (req, res) => {
 
-  //hash passwords
-  const ROUNDS = process.env.HASHING_ROUNDS || 8;
-  const hash = bcrypt.hashSync(userInfo.password, ROUNDS);
+    const userInfo = req.body
 
-   userInfo.password = hash;
 
-  usersDB
+    //hashing password
+    const ROUNDS = process.env.HASHING_ROUND || 8
+    const hashing = bcrpyt.hashSync(userInfo.password, ROUNDS)
+
+    userInfo.password = hashing
+
+    AuhtData
     .add(userInfo)
     .then(user => {
-      res.status(201).json(user);
+        res.status(201).json(user)
     })
-    .catch(error => {
-      res
-        .status(401)
-        .json({
-          errorMessage: `${error} your registeration failed! Something went wrong with your registration`
-        });
-    });
-});
+    .catch(err => {
+        res.status(500).json({ errorMessage: `${err}: Something went wrong with your registeration! Please try again!`})
+    })
+})
 
 
+//set up login here
+Router.post('/login', (req, res) => {
 
-router.post("/login", (req, res) => {
-  const { username, password } = req.body;
-
-  usersDB
+    const { username, password} = req.body
+    AuhtData
     .findBy({ username })
     .first()
     .then(user => {
-      if (user && bcrypt.hashSync(password, user.password)) {
-        const token = generateToken(user);//get a token
+            if (user && bcrpyt.hashSync(password, user.password)) {
+                const TOKEN = generatedToken(user)
 
-        res.status(200).json({
-          message: `welcome ${user.username}`,
-          id: user.id,
-          token,//send token
-        });
-      } else {
-        res.status(401).json({ message: "invaild credentials" });
-      }
+                res.status(200).json(TOKEN)
+            } else {
+                res.status(401).json({ errorMessage: 'You enter invail credentails'})
+            }
     })
-    .catch(error => {
-      res.status(500).json({ errorMessage: `${error}` });
-    });
-});
+    .catch(err => {
+        res.status(500).json({ errorMessage:` ${err}: Something went wrong when your login credentials! Try again`})
+    })
+})
 
-function generateToken(user) {
+function generatedToken(user) {
     const payload = {
         username: user.username
     }
 
-    // const secret = process.env.JWT_SECRET || "is it safe"
+    const secret = process.env.JWT_SECRET || 'Information is safe and secure'
     const options = {
-        expiresIn: "1h",
+        expiresIn:'1h'
     }
-    return jwt.sign(payload, options)
+
+    return JWT.sign(payload, secret, options)
 }
 
 
-module.exports = router;
+module.exports = Router

@@ -6,6 +6,7 @@ import ContentBlock from "../Components/ContentBlock"
 function Dashboard() {
   return (
     <div style={{display:'flex'}} className="Dashboard">
+    
      <Sidebar />
      <ContentBlock />
     </div>
