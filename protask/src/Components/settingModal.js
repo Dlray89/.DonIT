@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link} from "react-router-dom"
+
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -33,7 +35,7 @@ export default function Modal(props) {
           
 
           <Button variant='outlined' onClick={() => props.updateProject(true)}>My Account</Button>
-          <Button variant='outlined' onClick={props.update}>General Settings</Button>
+          <Link to='/'><Button variant='outlined' onClick={props.update}>Logout</Button></Link>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
