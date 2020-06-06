@@ -61,11 +61,16 @@ export default class Login extends React.Component{
                             type='text'
                             value={this.state.credentials.username}
                             onChange={this.loginHandler}
+                            inputMode='text'
+                            InputProps={{
+                                style:{
+                                    color:'white'
+                                }
+                            }}
                             
                             InputLabelProps={{
                                     style: {
-                                        color:'white', 
-                                       
+                                        color:'white',
                                     }
                                 }}
                              />
@@ -80,11 +85,18 @@ export default class Login extends React.Component{
                             type="text"
                             value={this.state.credentials.password}
                             onChange={this.loginHandler}
+                            inputProps={{
+                                style:{
+                                    color:'white',
+                                    textAlign:'center'
+                                }
+                            }}
                              
                             InputLabelProps={{
                                     style: {
                                         color:'white', 
-                                        border:'solid 2xp white' 
+                                        border:'solid 2xp white' ,
+                                        textAlign:'center'
                                     }
                                 }}
                             />

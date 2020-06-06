@@ -11,7 +11,7 @@ export const axiosWithAuth = () => {
         headers: {
             Authorization: token
         },
-        baseURL:'https://4000-c43c803a-0ccb-44a5-b1b3-998398b4ceca.ws-us02.gitpod.io/'
+        baseURL:'https://4000-de4fd779-d2de-485a-81dd-3890c5e70a96.ws-us02.gitpod.io/'
     
     })
     

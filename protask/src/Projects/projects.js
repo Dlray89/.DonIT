@@ -5,7 +5,7 @@ import TgCRUDOps from "../CRUD-OPS/TagsCrud"
 import TaskCRUD from "../CRUD-OPS/tasksCRUD"
 import crud_operations from "../CRUD-OPS/crud_operations"
 import JournalCRUD from "../CRUD-OPS/JournalCRUD"
-import { Button, Card, CardHeader, CardContent, CardActionArea, Typography, Divider, makeStyles, ListItem, List, ListItemText, Chip, TextField } from "@material-ui/core"
+import { Button, Card, CardHeader, CardContent, CardActionArea, Typography, Divider, makeStyles, ListItem, List, ListItemText, Chip, TextField, FormControl, FormControlLabel, Switch, FormGroup } from "@material-ui/core"
 import Modal from "../Components/Modal"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import HomeIcon from '@material-ui/icons/Home';
@@ -51,6 +51,7 @@ const Projects = props => {
     const initialProjects = {
         project_name: '',
         details: '',
+        isActive:false
 
 
     }
@@ -151,6 +152,24 @@ const Projects = props => {
         setCurrentTasks({ ...currentTask, [name]: value })
     }
 
+    const updateStatus = status => {
+        let data = {
+            id: currentProjects.id,
+            project_name: currentProjects.project_name,
+            details: currentProjects.details,
+            isActive:status
+        }
+    
+    crud_operations.updateProject(currentProjects, data)
+    .then(res => {
+        setCurrentProjects({
+            ...currentProjects, isActive: status})
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
 
     // set up put request here for projects
     const updateProject = e => {
@@ -208,7 +227,18 @@ const Projects = props => {
     return (
         <div className={classes.mainRoot}>
             <Card className={classes.rootCard} variant="outlined" >
-                <CardHeader title={currentProjects.project_name} subheaderTypographyProps={{ color: "white" }} subheader={`PROJECT-ID: #${currentProjects.id}`} />
+                <CardHeader title={currentProjects.project_name} subheader={currentProjects.isActive ? 'Complete' : 'Not Complete'} subheaderTypographyProps={{color:'white'}}  />
+                <div style={{border:'solid 2px red'}}>
+                    
+                {currentProjects.isActive ? (
+                    <button onClick={() => updateStatus(false)}> Not Complete</button>
+                ) : (
+                    <button onClick={() => updateStatus(true)}>Complete</button>
+                )}
+                </div>
+                
+                
+                
                 <Divider style={{ background: "white" }} />
 
                 <div style={{ display: 'flex', justifyContent: "space-between", width: "15%", padding: "1%" }}>
