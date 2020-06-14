@@ -7,8 +7,8 @@ const useStyles = makeStyles((theme) => ({
     dashRoot: {
       background:"grey",
       margin:'0',
-        width:'81vw',
-        padding:'1%'
+        width:'83vw',
+      
     },
     dashHub:{
          border:'solid 2px blue',
@@ -48,6 +48,10 @@ const classes = useStyles()
         <div>
             <SettingsBar />
         </div>
+
+        <Card variant='outlined' style={{width:'99%', margin:' 1% auto', padding:"2%", boxSizing:"border-box"}}>
+            DashBoard
+        </Card>
        
         <div className={classes.mainCard}>
             

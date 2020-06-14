@@ -1,22 +1,32 @@
-import React from 'react'
-import {Divider, Button, Typography} from "@material-ui/core"
-import Model from "../Components/settingModal"
+import React from "react"
+import {AppBar, Toolbar, Button, Typography} from "@material-ui/core"
+import SetModal from "./settingModal"
+import Time from "./time"
+
 
 
 const Settings = () => {
 
     return(
         <div>
-            <div style={{ display:'flex', justifyContent:'space-between', width:'70%', margin:'0 auto'}}>
-                 <Typography style={{width:"10%", marginTop:'2%', fontSize:"1.3rem"}}>
-                     David
-                 </Typography>
+            <AppBar style={{display:"flex", flexDirection:'row', justifyContent:"space-between", alignContent:'center', width:"100%", margin:'0% auto', background:"linear-gradient(to right, #000046, #1cb5e0)", boxSizing:'border-box'}} position='static'>
 
-                 <div>
-                    <Model  />
-                 </div>
-            </div>
-            <Divider style={{background:'linear-gradient(to right, #000046, #1cb5e0)', width:"75%", margin:' 0 auto'}} />
+                <Toolbar style={{width:"15%"}}>
+                <Typography>
+                   ProHASH
+                </Typography>
+                </Toolbar>
+                <div style={{width:'50%', display:'flex', justifyContent:'space-evenly'}}>
+
+                <div style={{ width:'30%', textAlign:'center'}}>
+                    <Time />
+                </div>
+                <div style={{ margin:"1% 0", width:'30%', textAlign:'center'}}>
+                    <SetModal />
+                </div>
+                </div>
+                
+            </AppBar>
         </div>
     )
 }
