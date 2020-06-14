@@ -49,15 +49,8 @@ const classes = useStyles()
             <SettingsBar />
         </div>
        
-        <Card className={classes.mainCard}>
-            <div style={{width:'100%', padding:'1%'}}>
-                <Card style={{width:'98%', margin:"0 auto", textAlign:"center",  border:'solid 1px white', background:'linear-gradient(to right, #000046, #1cb5e0)', color:'white'}}>
-                    <CardHeader title='Welcome, David' />
-                    <CardContent>
-                        Welcome to your project management tool
-                    </CardContent>
-                </Card>
-            </div>
+        <div className={classes.mainCard}>
+            
 
             <div style={{display:"flex", justifyContent:"space-evenly",  margin:'2% 0'}}>
             <Card variant="outlined" color='primary' className={classes.hubCards}>
@@ -89,7 +82,7 @@ const classes = useStyles()
 
             
 
-            </Card>
+            </div>
         </div>
     )
 }

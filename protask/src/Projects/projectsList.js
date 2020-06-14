@@ -47,7 +47,7 @@ const ProjectList = () => {
 
     useEffect(() => {
         axios
-            .get('https://4000-de4fd779-d2de-485a-81dd-3890c5e70a96.ws-us02.gitpod.io/api/projects')
+            .get('https://4000-da3eb0ef-41c2-4157-b3b6-062fd248edd0.ws-us02.gitpod.io/api/projects')
             .then(res => {
                 const projectList = res.data.filter(project =>
                     project.project_name.toLowerCase().includes(query.toLowerCase()))
