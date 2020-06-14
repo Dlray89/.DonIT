@@ -9,7 +9,7 @@ const Settings = () => {
 
     return(
         <div>
-            <AppBar style={{display:"flex", flexDirection:'row', justifyContent:"space-between", alignContent:'center', width:"100%", margin:'0% auto', background:"linear-gradient(to right, #000046, #1cb5e0)", boxSizing:'border-box'}} position='static'>
+            <AppBar style={{display:"flex", flexDirection:'row', justifyContent:"space-between", alignContent:'center', width:"100%", margin:'0% auto', background:"linear-gradient(to left, #000046, #1cb5e0)", boxSizing:'border-box'}} position='static'>
 
                 <Toolbar style={{width:"15%"}}>
                 <Typography>
