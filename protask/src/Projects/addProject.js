@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import TaskOps from '../CRUD-OPS/tasksCRUD'
 import crudOps from "../CRUD-OPS/crud_operations"
 import TagOps from "../CRUD-OPS/TagsCrud"
 import { TextField, Button } from "@material-ui/core"
@@ -40,15 +41,15 @@ const AddProject = () => {
         setProjects({ ...project, [name]: value })
     }
 
-    // const taskChangeHandler = e => {
-    //     const { name, value } = e.target
-    //     setTask({ ...task, [name]: value })
-    // }
+    const taskChangeHandler = e => {
+        const { name, value } = e.target
+        setTask({ ...task, [name]: value })
+    }
 
-    // const tagChangeHandler = e => {
-    //     const { name, value } = e.target
-    //     setTag({ ...tag, [name]: value })
-    // }
+    const tagChangeHandler = e => {
+        const { name, value } = e.target
+        setTag({ ...tag, [name]: value })
+    }
 
     const saveTag = () => {
         let data = {
@@ -78,26 +79,26 @@ const AddProject = () => {
 
     ///////////////////////////////
 
-    // const saveTasks = () => {
-    //     let data = {
-    //         task_Name: task.task_Name,
-    //         project_id: task.project_id
-    //     }
+    const saveTasks = () => {
+        let data = {
+            task_Name: task.task_Name,
+            project_id: task.project_id
+        }
 
-    //     TaskOps.createTask(data)
-    //         .then(res => {
-    //             setTask({
-    //                 id: res.data.id,
-    //                 task_Name: res.data.id,
-    //                 project_id: res.data.project_id
-    //             })
-    //             setSubmitted(true)
-    //             console.log("task create", res.data)
-    //         })
-    //         .catch(err => {
-    //             console.log(err)
-    //         })
-    // }
+        TaskOps.createTask(data)
+            .then(res => {
+                setTask({
+                    id: res.data.id,
+                    task_Name: res.data.id,
+                    project_id: res.data.project_id
+                })
+                setSubmitted(true)
+                console.log("task create", res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
     const newTask = () => {
         setTask(initialTaskState)

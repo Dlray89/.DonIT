@@ -7,7 +7,7 @@ const AddTask = () => {
     const initialtaskState = {
         id: null,
         name: '',
-        project_id: '',
+        // project_id: '',
     }
 
 
@@ -27,7 +27,7 @@ const AddTask = () => {
     const saveTask = () => {
         let data = {
             name: task.name,
-            project_id:task.project_id
+            // project_id:task.project_id
         }
 
             //function to get task state and send post req
@@ -36,7 +36,7 @@ const AddTask = () => {
             setTasks({
                 id: res.data.id,
                 name: res.data.name,
-                project_id:res.data.project_id
+                // project_id:res.data.project_id
             })
             setSubmitted(true)
             console.log("task create", res.data)
@@ -65,7 +65,7 @@ const AddTask = () => {
                <div style={{border:"solid 1px white", width:"50%", margin:"8% auto", padding:'1%', background:"linear-gradient(to right, #000046, #1cb5e0)"}}>
                     <p style={{color:'white'}}>Create new Task</p>
                     <div style={{margin:"2% 0"}}>
-                       <TextField
+                       {/* <TextField
                        
                       style={{width:'50%'}}
                        
@@ -79,7 +79,7 @@ const AddTask = () => {
                         InputLabelProps={{
                             style:{color:'white'}
                         }}
-                         />
+                         /> */}
                    </div>
 
                    <div style={{margin:"2% 0"}}>
