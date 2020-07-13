@@ -47,10 +47,10 @@ const ProjectList = () => {
 
     useEffect(() => {
         axios
-            .get('https://4000-da3eb0ef-41c2-4157-b3b6-062fd248edd0.ws-us02.gitpod.io/api/projects')
+            .get('https://prohash-backend.herokuapp.com/api/projects')
             .then(res => {
                 const projectList = res.data.filter(project =>
-                    project.project_name.toLowerCase().includes(query.toLowerCase()))
+                    project.name.toLowerCase().includes(query.toLowerCase()))
                 setProjects(projectList)
 
             })
@@ -69,7 +69,7 @@ const ProjectList = () => {
                     <Autocomplete
                         id="combo-box-demo"
                         options={projects}
-                        getOptionLabel={(option) => option.project_name}
+                        getOptionLabel={(option) => option.name}
                         style={{ width: 300 }}
                         renderInput={(params) => <TextField {...params} label="Search..." className={classes.TextField} onChange={changeHandler} />}
                     />
@@ -90,7 +90,7 @@ const ProjectList = () => {
             <div>
                 {projects.map(project => (
                     <Card variant='outlined' className={classes.cardRoot}>
-                        <CardHeader subheaderTypographyProps={{color:'white'}} style={{ display: 'flex' }} title={project.project_name} subheader={project.details} />
+                        <CardHeader subheaderTypographyProps={{color:'white'}} style={{ display: 'flex' }} title={project.name} subheader={project.details} />
 
 
 

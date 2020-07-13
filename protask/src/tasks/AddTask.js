@@ -6,7 +6,7 @@ import {TextField, Button} from "@material-ui/core"
 const AddTask = () => {
     const initialtaskState = {
         id: null,
-        task_Name: '',
+        name: '',
         project_id: '',
     }
 
@@ -26,7 +26,7 @@ const AddTask = () => {
 
     const saveTask = () => {
         let data = {
-            task_Name: task.task_Name,
+            name: task.name,
             project_id:task.project_id
         }
 
@@ -35,7 +35,7 @@ const AddTask = () => {
         .then(res => {
             setTasks({
                 id: res.data.id,
-                task_Name: res.data.task_Name,
+                name: res.data.name,
                 project_id:res.data.project_id
             })
             setSubmitted(true)
@@ -88,11 +88,11 @@ const AddTask = () => {
                        style={{width:"50%"}}
                        
                         type='text'
-                        id='task_Name'
+                        id='name'
                         required
-                        value={task.task_Name}
+                        value={task.name}
                         onChange={handleChange}
-                        name='task_Name'
+                        name='name'
                         label='Task Name'
                         InputLabelProps={{
                             style:{color:'white'}

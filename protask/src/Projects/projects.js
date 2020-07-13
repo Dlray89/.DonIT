@@ -5,16 +5,13 @@ import TgCRUDOps from "../CRUD-OPS/TagsCrud"
 import TaskCRUD from "../CRUD-OPS/tasksCRUD"
 import crud_operations from "../CRUD-OPS/crud_operations"
 import JournalCRUD from "../CRUD-OPS/JournalCRUD"
-import { Button, Card, CardHeader, CardContent, CardActionArea, Typography, Divider, makeStyles, ListItem, List, ListItemText, Chip, TextField, FormControl, FormControlLabel, Switch, FormGroup } from "@material-ui/core"
-import Modal from "../Components/Modal"
+import { Button, Card, CardHeader, CardContent, CardActionArea, Typography, Divider, makeStyles, ListItem, List, ListItemText, Chip, TextField} from "@material-ui/core"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import HomeIcon from '@material-ui/icons/Home';
 import DeleteIcon from '@material-ui/icons/Delete';
-import DoneIcon from "@material-ui/icons/Done"
 import CheckCircleTwoToneIcon from '@material-ui/icons/CheckCircleTwoTone';
 import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
 import EditIcon from '@material-ui/icons/Edit';
-import TagsCrud from "../CRUD-OPS/TagsCrud"
 
 const useStyles = makeStyles((theme) => ({
     mainRoot: {
@@ -49,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const Projects = props => {
 
     const initialProjects = {
-        project_name: '',
+        name: '',
         details: '',
         isActive:false
 
@@ -58,7 +55,7 @@ const Projects = props => {
 
     const initialTaskState = {
         id: null,
-        task_Name: '',
+        name: '',
         project_id: null
     }
 
@@ -74,8 +71,6 @@ const Projects = props => {
     const [currentTask, setCurrentTasks] = useState(initialTaskState)
     const [currentTags, setCurrentTags] = useState([])
     const [currentJournal, setCurrentJournal] = useState(initialJournalState)
-    const [color, setColor] = useState(true)
-    const [message, setMessage] = useState('')
 
 
 
@@ -155,7 +150,7 @@ const Projects = props => {
     const updateStatus = status => {
         let data = {
             id: currentProjects.id,
-            project_name: currentProjects.project_name,
+            name: currentProjects.name,
             details: currentProjects.details,
             isActive:status
         }
@@ -227,7 +222,7 @@ const Projects = props => {
     return (
         <div className={classes.mainRoot}>
             <Card className={classes.rootCard} variant="outlined" >
-                <CardHeader title={currentProjects.project_name} subheader={currentProjects.isActive ? 'Complete' : 'Not Complete'} subheaderTypographyProps={{color:'white'}}  />
+                <CardHeader title={currentProjects.name} subheader={currentProjects.isActive ? 'Complete' : 'Not Complete'} subheaderTypographyProps={{color:'white'}}  />
                 <div style={{border:'solid 2px red'}}>
                     
                 {currentProjects.isActive ? (
@@ -270,9 +265,9 @@ const Projects = props => {
                                         label='Project Name'
                                         variant='outlined'
                                         type='text'
-                                        id='project_name'
-                                        name='project_name'
-                                        value={currentProjects.project_name}
+                                        id='name'
+                                        name='name'
+                                        value={currentProjects.name}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -299,9 +294,9 @@ const Projects = props => {
                                             style={{ margin: "3% 0", width: '50%' }}
                                             placeholder="Task"
                                             type='text'
-                                            id='task_Name'
-                                            name='task_Name'
-                                            value={currentTask.task_Name}
+                                            id='name'
+                                            name='name'
+                                            value={currentTask.name}
                                             onChange={TasksHandleChange} 
                                             multiline/>
                                         <div style={{ textAlign: 'center', margin: "6% auto" }}>
@@ -346,7 +341,7 @@ const Projects = props => {
                         <ListItem style={{textAlign:'center'}}>
 
                             <ListItemText key={currentTask.project_id}>
-                                {currentTask.task_Name}
+                                {currentTask.name}
                             </ListItemText>
                         </ListItem>
                     </List>
