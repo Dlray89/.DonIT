@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { List, ListItem, ListItemText, makeStyles} from "@material-ui/core"
+import { List, ListItem, ListItemText, makeStyles, Button} from "@material-ui/core"
 import LOGO from "../logo/ProHASH.png"
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +31,14 @@ const useStyles = makeStyles((theme) => ({
             color:'white'
         }
 }))
-const SideBar = () => {
+
+const logout = () => {
+        localStorage.clear("token")
+        this.props.history.push('/')
+    }
+const SideBar = props => {
+
+    
 
     const classes = useStyles()
 
@@ -71,6 +78,10 @@ const SideBar = () => {
                         </ListItemText>
                     </ListItem>
                 </List>
+            </div>
+
+            <div>
+                <Button style={{border: 'solid 2px white', color: 'white'}} onClick={logout} variant='outlined'>Logout</Button>
             </div>
         </div>
     )
