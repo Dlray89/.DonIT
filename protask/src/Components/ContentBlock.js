@@ -1,9 +1,14 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { makeStyles, Card, CardHeader, CardContent, CardActionArea, Button, Typography, Divider } from "@material-ui/core"
-import SettingsBar from "./SettingsBar"
+//material-ui core compoenents
+import { makeStyles, Card, CardHeader, CardContent, CardActionArea, Button, Typography, Divider,  } from "@material-ui/core"
 
-//Antd components
+//material-ui labs
+import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot, TimelineOppositeContent } from '@material-ui/lab'
+
+import SettingsBar from "./SettingsBar"
+import axios from 'axios'
+//other libraries
 import { Empty } from "antd"
 
 const useStyles = makeStyles((theme) => ({
@@ -19,12 +24,12 @@ const useStyles = makeStyles((theme) => ({
     mainCard: {
         background: "grey",
         width: "100%",
-        margin:'0 auto',
+        margin: '0 auto',
         padding: "1%",
         color: 'white',
-        display:'flex',
-        justifyContent:"space-between",
-        boxSizing:"border-box"
+        display: 'flex',
+        justifyContent: "space-between",
+        boxSizing: "border-box"
 
     },
     GetStarted: {
@@ -33,11 +38,9 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
         border: 'solid 1px white',
         boxSizing: "border-box",
-        marginTop:"2%",
-        background: 'linear-gradient(to right, #000046, #1cb5e0)',
-        color: "white",
-        display: "flex",
-        
+        marginTop: "2%",
+        color: "black",
+
     },
     Links: {
         textDecoration: 'none',
@@ -46,7 +49,29 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const ContentBlock = () => {
+
     const classes = useStyles()
+    const [projects, setprojects] = React.useState([])
+    const sortedProjects = projects.sort(function(a,b){
+        return a.createdAt - b.createdAt
+    })
+    console.log('sorted',sortedProjects)
+
+
+    React.useEffect(() => {
+        axios.get('https://prohash-backend.herokuapp.com/api/projects')
+            .then(res => {
+                const projectslist = res.data
+                setprojects(projectslist)
+                console.log(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [setprojects])
+
+
+
     return (
         <div className={classes.dashRoot}>
             <div>
@@ -57,53 +82,53 @@ const ContentBlock = () => {
                 DashBoard
         </Card>
 
+
             <div className={classes.mainCard}>
 
 
-                <Card variant="outlined" style={{ width: '48.5%' }}>
-                    <CardHeader title='Get Started' />
-                    <Divider style={{background:'black',}}  />
+                <Card variant="outlined" style={{ width: '48.5%', height:'35vh' }}>
+                    <CardHeader style={{textAlign:'center'}} title='Get Started' />
+                    <Divider style={{ background: 'black', }} />
                     <div variant="outlined" color='primary' className={classes.GetStarted}>
 
-                        <div style={{ border: 'solid 2px red', width: "27%" }}>
-                            <Typography > Create Project</Typography>
+                        <div style={{width: "50%", margin:'3% auto' }}>
+                            <Typography > Create a new project and keep track of your daily goals</Typography>
+
                         </div>
 
-                        <div style={{ border: 'solid 2px green', width:'32%' }}>
-                            <Link to='/addproject' className={classes.Links}><Button variant="outlined" style={{ color: 'white', border: 'solid 1px white', width:'100%' }}>New Project</Button></Link>
+                        <div style={{width: '40%', margin:'0 auto' }}>
+                            <Link to='/addproject' className={classes.Links}><Button variant="outlined" color='primary' style={{ color: 'black',  width: '100%', margin:'2% auto' }}>Create Project</Button></Link>
                         </div>
-
-
-                    </div>
-
-
-                    <div variant="outlined" color='primary' className={classes.GetStarted}>
-
-                        <div style={{ border: 'solid 2px red', width: "27%" }}>
-                            <Typography > Create Tasks</Typography>
-                        </div>
-
-                        <div style={{ border: 'solid 2px green', width: '32%' }}>
-                            <Link to='/tasks' className={classes.Links}><Button variant="outlined" style={{ color: 'white', width: '100%', border: 'solid 1px white' }}>Tasks</Button></Link>
-                        </div>
-
-
                     </div>
                 </Card>
-            {/* /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-                <Card variant='outlined' style={{width:'48.5%', textAlign:'center', padding:'1%'}}>
-                    <Empty image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg" imageStyle={{
-                        height:'60%'
-                    }} description={
-                        <span>
-                           Create a to do list
-                        </span>
-                    } >
-                        <Button variant="outlined">
-                            Create To Do
-                        </Button>
-                    </Empty>
+
+                <Card style={{ width: '50%', textAlign:'center' }}>
+                    <CardHeader title='Your Timeline' />
+                    
+                    <Divider />
+                    {sortedProjects.map(project => (
+                        <Timeline align='alternate'>
+                            <TimelineItem>
+                                <TimelineOppositeContent>
+                                    <Typography>
+                                        {project.createdAt}
+                                    </Typography>
+                                </TimelineOppositeContent>
+                                <TimelineSeparator>
+                                    <TimelineDot color='primary' />
+                                    <TimelineConnector/>
+                                </TimelineSeparator>
+                                <TimelineContent>
+                                    <Typography>
+                                        {project.name}
+                                    </Typography>
+                                </TimelineContent>
+                            </TimelineItem>
+
+                        </Timeline>
+                    ))}
                 </Card>
+
 
             </div>
         </div>

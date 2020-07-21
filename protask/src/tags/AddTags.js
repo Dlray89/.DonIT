@@ -8,7 +8,7 @@ import Alert from '@material-ui/lab/Alert';
 const AddTag = () => {
     const initialTagState = {
         id: null,
-        name: '',
+        tagname: '',
         project_id: '',
     }
 
@@ -28,7 +28,7 @@ const AddTag = () => {
 
     const saveTag = () => {
         let data = {
-            name: tag.name,
+            tagname: tag.tagname,
             project_id:tag.project_id
         }
 
@@ -37,8 +37,8 @@ const AddTag = () => {
         .then(res => {
             setTag({
                 id: res.data.id,
-                name: res.data.name,
-                project_id:res.data.project_id
+                tagname: res.data.tagname,
+                // project_id:res.data.project_id
             })
             setSubmitted(true)
             console.log("tag create", res.data)
@@ -69,12 +69,12 @@ const AddTag = () => {
                        <TextField
                        variant="outlined"
                         type='text'
-                        id='name'
+                        id='tagname'
                         required
-                        value={tag.name}
+                        value={tag.tagname}
                         onChange={handleChange}
-                        name='name'
-                        label='Tag name'
+                        name='tagname'
+                        label='Create a tag'
                         InputLabelProps={{
                             style: {
                                 color:'white'

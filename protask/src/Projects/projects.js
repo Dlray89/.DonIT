@@ -92,6 +92,7 @@ const Projects = props => {
         TgCRUDOps.getTagById(id)
             .then(res => {
                 setCurrentTags(res.data)
+                console.log('tags', res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -102,6 +103,7 @@ const Projects = props => {
         TaskCRUD.getTaskById(id)
             .then(res => {
                 setCurrentTasks(res.data)
+                console.log('tasks', res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -341,7 +343,7 @@ const Projects = props => {
                         <ListItem style={{textAlign:'center'}}>
 
                             <ListItemText key={currentTask.project_id}>
-                                {currentTask.name}
+                                {currentTask.taskname}
                             </ListItemText>
                         </ListItem>
                     </List>
@@ -382,9 +384,9 @@ const Projects = props => {
            
 
                 <Divider  />
-                <div  style={{width:'60%', padding:"1%"}}>
+                <div onClick={deleteTag}  style={{width:'60%', padding:"1%"}}>
                     <h5>Tags:</h5>
-                    <Chip label={currentTags.name}
+                    <Chip label={currentTags.tagname}
                        deleteIcon={<DeleteIcon />}
                         onDelete={deleteTag}
                     />

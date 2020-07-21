@@ -11,6 +11,7 @@ const AddProject = () => {
         id: null,
         name: '',
         details: '',
+        createdAt:''
 
     }
 
@@ -108,7 +109,8 @@ const AddProject = () => {
     const saveProject = () => {
         let data = {
             name: project.name,
-            details: project.details
+            details: project.details,
+            createdAt: project.createdAt
         }
 
         //function to get project state and send post req
@@ -117,7 +119,8 @@ const AddProject = () => {
                 setProjects({
                     id: res.data.id,
                     name: res.data.name,
-                    details: res.data.details
+                    details: res.data.details,
+                    createdAt: res.data.createdAt
                 })
                 setSubmitted(true)
                 console.log("project create", res.data)
@@ -163,6 +166,19 @@ const AddProject = () => {
                                 }}
                                 InputProps={{color:'white'}}
 
+                            />
+                            <TextField
+                            style={{}}
+                            type='date'
+                            id='createdAt'
+                            required
+                            value={project.createdAt}
+                            onChange={handleChange}
+                            name='createdAt'
+                            InputLabelProps={{
+                                shrink: true
+                            }}
+                            
                             />
                         </div>
                         <div>
