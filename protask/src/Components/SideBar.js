@@ -8,9 +8,10 @@ const useStyles = makeStyles((theme) => ({
            display:'flex',
            flexDirection:'column',
            
-            background:"linear-gradient(to right, #000046, #1cb5e0)",
+            background:"linear-gradient(to left, #d3cce3, #e9e4f0);",
             width:'15%',
             height:'120vh',
+            borderRight: 'solid black 1px',
            
             padding:'1%'
         },
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         },
         listLink: {
             textDecoration:'none',
-            color:'white'
+            color:'black'
         }
 }))
 
@@ -80,9 +81,7 @@ const SideBar = props => {
                 </List>
             </div>
 
-            <div>
-                <Button style={{border: 'solid 2px white', color: 'white'}} onClick={logout} variant='outlined'>Logout</Button>
-            </div>
+                
         </div>
     )
 }

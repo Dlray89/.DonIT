@@ -67,11 +67,10 @@ export default class Login extends React.Component {
                                 value={this.state.credentials.username}
                                 onChange={this.loginHandler}
                                 inputMode='text'
-                                InputProps={{
+                                inputProps={{
                                     style: {
                                         color: 'black',
                                         textAlign: 'center'
-                                        
                                     }
                                 }}
 

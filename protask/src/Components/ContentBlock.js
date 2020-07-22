@@ -14,7 +14,7 @@ import Calendar from "react-material-ui-calendar"
 
 const useStyles = makeStyles((theme) => ({
     dashRoot: {
-        background: "grey",
+        background: "linear-gradient(to bottom, #bdc3c7, #2c3e50);",
         margin: '0',
         width: '83vw',
 
@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
         border: 'solid 2px blue',
     },
     mainCard: {
-        background: "grey",
         width: "100%",
         margin: '0 auto',
         padding: "1%",
@@ -37,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         width: "100%",
         justifyContent: 'space-between',
-        border: 'solid 1px white',
         boxSizing: "border-box",
         marginTop: "2%",
         color: "black",
@@ -75,20 +73,18 @@ const ContentBlock = () => {
 
     return (
         <div className={classes.dashRoot}>
-            <div>
+            <div >
                 <SettingsBar />
             </div>
 
-            <Card variant='outlined' style={{ width: '98%', margin: ' 1% auto', padding: "2%", boxSizing: "border-box" }}>
-                DashBoard
-        </Card>
+            
 
 
             <div className={classes.mainCard}>
 
 
-                <Card variant="outlined" style={{ width: '48.5%', height: '50vh' }}>
-                    <CardHeader style={{ textAlign: 'center' }} title='Get Started' />
+                <Card variant="outlined" style={{ width: '48.5%', height: '50vh', background:'linear-gradient(to right, #d3cce3, #e9e4f0)', color:'white' }}>
+                    <CardHeader  style={{background:'linear-gradient(to left, #bdc3c7, #2c3e50)', textAlign: 'center', color:'white' }} title='Get Started' />
                     <Divider style={{ background: 'black', }} />
                     <div variant="outlined" color='primary' className={classes.GetStarted}>
 
@@ -109,8 +105,8 @@ const ContentBlock = () => {
 
 
 
-                <Card style={{ width: '50%', textAlign: 'center' }}>
-                    <CardHeader title='Your Timeline' />
+                <Card style={{ width: '50%', textAlign: 'center', background:'linear-gradient(to right, #d3cce3, #e9e4f0)', textAlign:'center', color:'white' }}>
+                    <CardHeader style={{background:'linear-gradient(to left, #bdc3c7, #2c3e50)'}} title='Your Timeline' />
 
                     <Divider />
                     {sortedProjects.map(project => (
@@ -118,7 +114,7 @@ const ContentBlock = () => {
                         <Timeline align='alternate'>
                             <TimelineItem>
                                 <TimelineOppositeContent>
-                                    <Typography>
+                                    <Typography style={{color:'black'}}>
                                         {project.createdAt}
                                     </Typography>
                                 </TimelineOppositeContent>
@@ -127,7 +123,7 @@ const ContentBlock = () => {
                                     <TimelineConnector />
                                 </TimelineSeparator>
                                 <TimelineContent>
-                                    <Typography>
+                                    <Typography style={{color:'black'}}>
                                         {project.name}
                                     </Typography>
                                 </TimelineContent>
