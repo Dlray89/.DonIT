@@ -68,7 +68,7 @@ const SideBar = props => {
 
                     <ListItem button className={classes.listButton}>
                         <ListItemText className={classes.listText}>
-                            <Link to='/tasks' className={classes.listLink}>Task</Link>
+                            <Link to='/calendar' className={classes.listLink}>Calendar</Link>
                         </ListItemText>
                     </ListItem>
 

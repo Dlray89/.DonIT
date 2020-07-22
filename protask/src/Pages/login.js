@@ -78,8 +78,8 @@ export default class Login extends React.Component {
                                 InputLabelProps={{
                                     style: {
                                         color: 'black',
-                                        textAlign: 'center',
-                                       
+                                        border: 'solid 2xp black',
+                                        textAlign: 'center'
                                     }
                                 }}
                             />

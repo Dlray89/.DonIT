@@ -10,6 +10,7 @@ import Project from "./Projects/projects"
 import Login from "./Pages/login"
 import Register from "./Pages/Register"
 import PrivateRoute from './utils/privateRoute'
+import Calendar from './Pages/Calendar'
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route exact path="/addtasks" component={AddTask} />
         <Route exact path="/addtags" component={AddTags} />
         <Route exact path="/projects/:id/tasks" component={ProjectTask} />
+        <Route exact path='/calendar' component={Calendar} />
 
         
         
