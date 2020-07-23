@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import PopUp from "reactjs-popup"
-import TgCRUDOps from "../CRUD-OPS/TagsCrud"
-import TaskCRUD from "../CRUD-OPS/tasksCRUD"
-import crud_operations from "../CRUD-OPS/crud_operations"
-import JournalCRUD from "../CRUD-OPS/JournalCRUD"
+import TgCRUDOps from "../crudoperations/TagsCrud"
+import TaskCRUD from "../crudoperations/tasksCRUD"
+import crud_operations from "../crudoperations/crud_operations"
+// import JournalCRUD from "../CRUD-OPS/JournalCRUD"
 import { Button, Card, CardHeader, CardContent, CardActionArea, Typography, Divider, makeStyles, ListItem, List, ListItemText, Chip, TextField} from "@material-ui/core"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import HomeIcon from '@material-ui/icons/Home';
@@ -111,18 +111,18 @@ const Projects = props => {
 
     }
 
-    const getJournal = id => {
-        JournalCRUD.getJournalById(id)
-        .then(res => {
-            setCurrentJournal(res.data)
-            console.log("journal data", res.data)
-        })
-        .catch(err => console.log(err))
-    }
+    // const getJournal = id => {
+    //     JournalCRUD.getJournalById(id)
+    //     .then(res => {
+    //         setCurrentJournal(res.data)
+    //         console.log("journal data", res.data)
+    //     })
+    //     .catch(err => console.log(err))
+    // }
 
-    useEffect(() => {
-        getJournal(props.match.params.id)
-    }, [props.match.params.id])
+    // useEffect(() => {
+    //     getJournal(props.match.params.id)
+    // }, [props.match.params.id])
 
     useEffect(() => {
         getTasks(props.match.params.id)

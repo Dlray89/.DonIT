@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import TagOps from "../CRUD-OPS/TagsCrud"
+import TagOps from "../crudoperations/TagsCrud"
 import {TextField, Button} from "@material-ui/core"
 import Alert from '@material-ui/lab/Alert';
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import TaskOps from "../CRUD-OPS/tasksCRUD"
+import TaskOps from "../crudoperations/tasksCRUD"
 import {TextField, Button} from "@material-ui/core"
 
 const AddTask = () => {

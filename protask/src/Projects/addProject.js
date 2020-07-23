@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import TaskOps from '../CRUD-OPS/tasksCRUD'
-import crudOps from "../CRUD-OPS/crud_operations"
-import TagOps from "../CRUD-OPS/TagsCrud"
+import TaskOps from '../crudoperations/tasksCRUD'
+import crudOps from "../crudoperations/crud_operations"
+import TagOps from "../crudoperations/TagsCrud"
 import { TextField, Button } from "@material-ui/core"
 import { number } from "prop-types"
 

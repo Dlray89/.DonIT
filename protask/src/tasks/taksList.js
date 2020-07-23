@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import TASKCRUD from "../CRUD-OPS/tasksCRUD"
+import TASKCRUD from "../crudoperations/tasksCRUD"
 
 
 
