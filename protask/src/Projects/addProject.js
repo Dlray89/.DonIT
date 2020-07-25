@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import TaskOps from '../CRUD-OPS/tasksCRUD'
 import crudOps from "../CRUD-OPS/crud_operations"
 import TagOps from "../CRUD-OPS/TagsCrud"
-import { TextField, Button } from "@material-ui/core"
+import { TextField, Button, Card, CardHeader, CardContent, CardActionArea, Divider } from "@material-ui/core"
 import { number } from "prop-types"
 
 const AddProject = () => {
@@ -137,38 +137,30 @@ const AddProject = () => {
     
 
     return (
-        <div style={{ width: "100%", textAlign: 'center', height: "93vh", padding: "1%", background: 'grey' }}>
+        <div style={{ width: "100%", textAlign: 'center', padding: "1.4%", background: 'linear-gradient(to bottom, #bdc3c7, #2c3e50)'}}>
             {submitted ? (
-                <div>
-                    <p style={{ color: 'white' }}>THIS IS YOUR PROJECT-ID: #{project.id}</p>
-                    <p style={{ color: 'white' }}>YOU WILL NEED THIS TO ADD A TASK TO GET YOU STARTED!</p>
+                <div style={{width:'100%', padding:"14.4%", boxSizing:'border-box'}}>
+                <Card>
+                    <CardHeader  />
+                    <CardContent>
+                    <p style={{ color: 'black' }}>THIS IS YOUR PROJECT-ID: #{project.id}</p>
+                    <p style={{ color: 'black' }}>YOU WILL NEED THIS TO ADD A TASK TO GET YOU STARTED!</p>
                     <Link to='/addtasks'><Button variant='outlined' onClick={newProject}>
                         Next: Add a task
                        </Button></Link>
+                       </CardContent>
+                </Card>
                 </div>
             ) : (
-                    <div style={{ border: "solid 1px white", width: "50%", padding: "1%", margin: "7% auto", background: "white", background: "linear-gradient(to right, #000046, #1cb5e0)", color: 'white' }}>
-                        <div>
-                            <p>Create new project</p>
+                    <div style={{width: "100%", padding: "4.4%", margin: "1% auto", background: "black", background: "linear-gradient(to bottom, #bdc3c7, #2c3e50);", color: 'black', boxSizing:'border-box', }}>
+                        <Card style={{width: '60%', margin: '0 auto', background: 'linear-gradient(to right, #d3cce3, #e9e4f0)'}}>
+                            <CardHeader style={{background:'linear-gradient(to left, #bdc3c7, #2c3e50)', color:'white'}} title='Create a project'  />
+                            <Divider  />
+                            <CardContent>
+                                
+                                <div style={{ boxSizing:'border-box'}}>
                             <TextField
-                                style={{ width: "50%", margin: "3% 0", color:'white', borderBottom: 'solid 1px white' }}
-                                label="Project Name"
-                                type='text'
-                                id='name'
-                                required
-                                value={project.name}
-                                onChange={handleChange}
-                                name='name'
-                                InputLabelProps={{
-                                    style: {
-                                        color:'white',    
-                                    }
-                                }}
-                                InputProps={{color:'white'}}
-
-                            />
-                            <TextField
-                            style={{}}
+                            style={{ width: '45%'}}
                             type='date'
                             id='createdAt'
                             required
@@ -180,13 +172,43 @@ const AddProject = () => {
                             }}
                             
                             />
-                        </div>
-                        <div>
+                            </div>
+                            <div style={{ boxSizing:'border-box'}}>
+                            <TextField
+                                style={{ width: "45%", margin: "3% 0", color:'black', borderBottom: 'solid 1px black' }}
+                                label="Project Name"
+                                type='text'
+                                id='name'
+                                required
+                                value={project.name}
+                                onChange={handleChange}
+                                name='name'
+                                inputProps={{
+                                    style: {
+                                        color: 'black',
+                                        textAlign: 'center'
+                                    }
+                                }}
+
+                                InputLabelProps={{
+                                    style: {
+                                        color: 'black',
+                                        border: 'solid 2xp black',
+                                        textAlign: 'center'
+                                    }
+                                }}
+
+                            />
+                            </div>
+
+                            
+
+                             <div style={{boxSizing:'border-box'}}>
                             <TextField
 
                                 multiline
-                                style={{ width: "45%", marginBottom: "2%", color:'white'}}
-                                color='white'
+                                style={{ width: "45%", marginBottom: "2%", color:'black'}}
+                                color='black'
                                 rows={7}
                                 variant="outlined"
                                 type='text'
@@ -196,18 +218,30 @@ const AddProject = () => {
                                 onChange={handleChange}
                                 name='details'
                                 label="Details of your project"
+                                inputProps={{
+                                    style: {
+                                        color: 'black',
+                                        // textAlign: 'center'
+                                    }
+                                }}
+
                                 InputLabelProps={{
                                     style: {
-                                        color:'white',
-                                        
+                                        color: 'black',
+                                        // textAlign: 'center'
                                     }
                                 }}
                             />
                         </div>
-                        <div>
-                            <Button style={{color:'white', border:'solid 1px white'}} variant='outlined' onClick={saveProject}>Submit</Button>
-                            <Link to='/'><Button style={{color:'white', border:'solid 1px white'}}>Cancel</Button></Link>
-                        </div>
+
+                        <CardActionArea style={{display:'flex', justifyContent:'space-evenly'}}>
+                            <Button style={{color:'black', border:'solid 1px black'}} variant='outlined' onClick={saveProject}>Submit</Button>
+                            <Link to='/dashboard'><Button style={{color:'black', border:'solid 1px black'}}>Cancel</Button></Link>
+                        </CardActionArea>
+                            </CardContent>
+                        </Card>
+                       
+                        
                     </div>
                 )}
 

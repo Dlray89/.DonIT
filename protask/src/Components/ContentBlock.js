@@ -105,13 +105,13 @@ const ContentBlock = () => {
 
 
 
-                <Card style={{ width: '50%', textAlign: 'center', background:'linear-gradient(to right, #d3cce3, #e9e4f0)', textAlign:'center', color:'white' }}>
+                <Card style={{ width: '50%', textAlign: 'center', background:'linear-gradient(to right, #d3cce3, #e9e4f0)', textAlign:'center', color:'white', overflowY:'scroll', height:'60vh' }}>
                     <CardHeader style={{background:'linear-gradient(to left, #bdc3c7, #2c3e50)'}} title='Your Timeline' />
 
                     <Divider />
                     {sortedProjects.map(project => (
 
-                        <Timeline align='alternate'>
+                        <Timeline style={{}} align='alternate'>
                             <TimelineItem>
                                 <TimelineOppositeContent>
                                     <Typography style={{color:'black'}}>

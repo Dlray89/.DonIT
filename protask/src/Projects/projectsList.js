@@ -9,7 +9,8 @@ const useStyles = makeStyles((theme) => ({
     plRoot: {
         width: '100%',
         padding: '1%',
-        background:'grey'
+        background:'grey',
+        overflow:'auto'
     },
     cardRoot: {
         display: 'flex',
@@ -87,7 +88,7 @@ const ProjectList = () => {
             </div>
 
            
-            <div>
+            <div style={{scrollBehavior:'smooth', height:'80vh'}}>
                 {projects.map(project => (
                     <Card variant='outlined' className={classes.cardRoot}>
                         <CardHeader subheaderTypographyProps={{color:'white'}} style={{ display: 'flex' }} title={project.name} subheader={project.details} />
