@@ -292,7 +292,7 @@ const Projects = props => {
                                                 type='text'
                                                 id='name'
                                                 name='name'
-                                                value={currentTask.name}
+                                                value={currentTask.taskname}
                                                 onChange={TasksHandleChange}
                                                 multiline />
                                                 </div>
