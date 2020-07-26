@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import Sidebar from "../Components/SideBar"
 import PopUp from "reactjs-popup"
 import TgCRUDOps from "../CRUD-OPS/TagsCrud"
 import TaskCRUD from "../CRUD-OPS/tasksCRUD"
 import crud_operations from "../CRUD-OPS/crud_operations"
 import JournalCRUD from "../CRUD-OPS/JournalCRUD"
-import { Button, Card, CardHeader, CardContent, CardActionArea, Typography, Divider, makeStyles, ListItem, List, ListItemText, Chip, TextField} from "@material-ui/core"
+import { Button, Card, CardHeader, Divider, makeStyles, ListItem, List, ListItemText, Chip, TextField, Dialog, DialogContent, DialogContentText, DialogTitle, FormControlLabel, Checkbox } from "@material-ui/core"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import HomeIcon from '@material-ui/icons/Home';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -15,17 +16,19 @@ import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
     mainRoot: {
-        height:'100vh',
         width: "100%",
-        padding: "1%",
-        background: "grey"
+        background: "linear-gradient(to left, #bdc3c7, #2c3e50)",
+        boxSizing: 'border-box',
+        height:'100vh'
+
     },
     rootCard: {
-        border: "solid 1px white",
-        width: "100%",
+        border: "solid 1px red",
+        width: "50%",
         textAlign: "start-end",
         background: "linear-gradient(to right, #000046, #1cb5e0)",
-        color: "white"
+        color: "white",
+        boxSizing: 'border-box'
     },
     cardTag: {
         display: "flex",
@@ -48,7 +51,7 @@ const Projects = props => {
     const initialProjects = {
         name: '',
         details: '',
-        isActive:false
+        createdAt: ''
 
 
     }
@@ -59,18 +62,14 @@ const Projects = props => {
         project_id: null
     }
 
-    const initialJournalState = {
-        id: null,
-        title:'',
-        journal_content:'',
-        project_id: null
-    }
+
 
     const classes = useStyles()
     const [currentProjects, setCurrentProjects] = useState(initialProjects)
     const [currentTask, setCurrentTasks] = useState(initialTaskState)
     const [currentTags, setCurrentTags] = useState([])
-    const [currentJournal, setCurrentJournal] = useState(initialJournalState)
+    const [open, setOpen] = useState(false)
+    const [deleteopen, setDeletedopen] = useState(false)
 
 
 
@@ -111,18 +110,6 @@ const Projects = props => {
 
     }
 
-    const getJournal = id => {
-        JournalCRUD.getJournalById(id)
-        .then(res => {
-            setCurrentJournal(res.data)
-            console.log("journal data", res.data)
-        })
-        .catch(err => console.log(err))
-    }
-
-    useEffect(() => {
-        getJournal(props.match.params.id)
-    }, [props.match.params.id])
 
     useEffect(() => {
         getTasks(props.match.params.id)
@@ -136,8 +123,23 @@ const Projects = props => {
         getProject(props.match.params.id)
     }, [props.match.params.id])
 
+    const hanldeOpen = () => {
+        setOpen(true)
+    }
 
-    //end of get requests//////////////////////
+    const close = () => {
+        setOpen(false)
+    }
+
+    const handleDelete = () => {
+        setDeletedopen(true)
+    }
+
+    const handleDeleteClose = () => {
+        setDeletedopen(false)
+    }
+
+
 
     const handleChange = e => {
         const { name, value } = e.target
@@ -154,18 +156,19 @@ const Projects = props => {
             id: currentProjects.id,
             name: currentProjects.name,
             details: currentProjects.details,
-            isActive:status
+            isCompleted: status
         }
-    
-    crud_operations.updateProject(currentProjects, data)
-    .then(res => {
-        setCurrentProjects({
-            ...currentProjects, isActive: status})
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}
+
+        crud_operations.updateProject(currentProjects, data)
+            .then(res => {
+                setCurrentProjects({
+                    ...currentProjects, isCompleted: status
+                })
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
 
     // set up put request here for projects
@@ -223,180 +226,128 @@ const Projects = props => {
 
     return (
         <div className={classes.mainRoot}>
-            <Card className={classes.rootCard} variant="outlined" >
-                <CardHeader title={currentProjects.name} subheader={currentProjects.isActive ? 'Complete' : 'Not Complete'} subheaderTypographyProps={{color:'white'}}  />
-                <div style={{border:'solid 2px red'}}>
-                    
-                {currentProjects.isActive ? (
-                    <button onClick={() => updateStatus(false)}> Not Complete</button>
-                ) : (
-                    <button onClick={() => updateStatus(true)}>Complete</button>
-                )}
-                </div>
-                
-                
-                
-                <Divider style={{ background: "white" }} />
 
-                <div style={{ display: 'flex', justifyContent: "space-between", width: "15%", padding: "1%" }}>
+            <Card style={{ margin: '3% auto', width: '86%',display: 'flex', justifyContent: "space-between", background:'#bdc3c7' }}>
+                <div style={{width: '40%', padding: '1%', fontSize: '24px' }}>{currentProjects.name}</div>
 
-                    <Link style={{ textDecoration: "none", color: "white" }} to='/projects' ><ArrowBackIcon /></Link>
-                    <Link style={{ textDecoration: "none", color: "white" }} to='/' ><HomeIcon /></Link>
+                <Divider orientation="vertical" />
 
+                <div style={{padding: '1%', width: '40%', display: 'flex', justifyContent: 'space-evenly' }}>
+                    <Link to='/dashboard' style={{textDecoration:"none"}}><Button style={{background:'linear-gradient(to left, #bdc3c7, #2c3e50)', color:'white'}} variant='outlined'>Home</Button></Link>
+                    <Button style={{background:'linear-gradient(to left, #bdc3c7, #2c3e50)', color:'white'}} variant='outlined' onClick={handleDelete}>Delete</Button>
+                    <Dialog open={deleteopen} onClose={handleDeleteClose}>
+                        <DialogTitle>Are you Sure you want to delete?</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                <Button onClick={deleteProject}>Yes</Button>
+                                <Button onClick={handleDeleteClose}>No</Button>
+                            </DialogContentText>
 
-                    <PopUp contentStyle={{ color: "blue", textAlign: 'center' }} trigger={<DeleteIcon />}>
-                        <p style={{ color: 'black' }}>Are you sure you want to delete?</p>
-                        <CheckCircleTwoToneIcon onClick={deleteProject} />
-                        <HighlightOffTwoToneIcon />
+                        </DialogContent>
+                    </Dialog>
 
-                    </PopUp>
-
-
-                    <PopUp position='bottom left' contentStyle={{ width: '40%', margin: '0', textAlign: 'center' }} trigger={<EditIcon />}>
-                        <div style={{ padding: '1%' }}>
-                            <Typography style={{ color: 'white', background: 'linear-gradient(to right, #000046, #1cb5e0)' }}>Edit your project here</Typography>
-                        </div>
-
-                        <div>
-
-                            <form key={currentProjects.id}>
+                    <Button style={{background:'linear-gradient(to left, #bdc3c7, #2c3e50)', color:'white'}} variant='outlined' onClick={hanldeOpen}>Update</Button>
+                    <Dialog  open={open} onClose={close}>
+                        <DialogTitle >Update your project and task here. Make sure everything is looking how you want it.</DialogTitle>
+                        <Divider />
+                        <DialogContent >
+                            <DialogContentText>
                                 <div>
-
-                                    <TextField
-                                        style={{ margin: "3% 0", width: "70%" }}
-                                        label='Project Name'
-                                        variant='outlined'
-                                        type='text'
-                                        id='name'
-                                        name='name'
-                                        value={currentProjects.name}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <div>
-
-                                    <TextField
-                                        style={{ margin: "3% 0", width: '80%' }}
-                                        multiline
-                                        rows={5}
-                                        variant='outlined'
-                                        label="Project Detail's"
-                                        type='text'
-                                        id='details'
-                                        name='details'
-                                        value={currentProjects.details}
-                                        onChange={handleChange}
-                                    />
-                                    <Typography color='black '>Update Task</Typography>
-                                    <div style={{ border: 'solid 2px lightgrey', display: 'flex', justifyContent: "space-evenly", alignContent: 'center', textAlign: 'center', width: '90%', margin: '0 auto', padding: '1%', background: 'lightgrey' }}>
-
-
-
-                                        <TextField variant='outlined'
-                                            style={{ margin: "3% 0", width: '50%' }}
-                                            placeholder="Task"
+                                    <div style={{ width:'100%', textAlign:'center'}}>
+                                        <TextField
+                                            style={{ width:'100%', textAlign:'center'}}
+                                            label='Project Name'
+                                            variant='outlined'
                                             type='text'
                                             id='name'
                                             name='name'
-                                            value={currentTask.name}
-                                            onChange={TasksHandleChange} 
-                                            multiline/>
-                                        <div style={{ textAlign: 'center', margin: "6% auto" }}>
-                                            <Button variant='outlined' onClick={updateTask}>Save Task</Button>
-                                        </div>
-
+                                            value={currentProjects.name}
+                                            onChange={handleChange}
+                                        />
                                     </div>
+                                    <div>
+                                        <TextField
+                                            style={{ width:'100%', textAlign:'center', margin:'3% 0%'}}
+                                            multiline
+                                            rows={5}
+                                            variant='outlined'
+                                            label="Project Detail's"
+                                            type='text'
+                                            id='details'
+                                            name='details'
+                                            value={currentProjects.details}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <Divider />
 
+                                    <DialogTitle>
+                                        Update Task
+                                         </DialogTitle>
+                                        <div style={{display:'flex',  justifyContent:'space-between'}}>
+                                            <div style={{width:'60%'}}>
+                                            <TextField variant='outlined'
+                                                style={{ margin: "3% 0", width: '100%' }}
+                                                placeholder="Task"
+                                                type='text'
+                                                id='name'
+                                                name='name'
+                                                value={currentTask.name}
+                                                onChange={TasksHandleChange}
+                                                multiline />
+                                                </div>
+                                            <div style={{width:"40%", padding:'1%', textAlign:'center'}}>
+                                                <Button style={{margin:'5% 0%'}} variant='outlined' onClick={updateTask}>Save Task</Button>
 
+                                            </div>
+
+                                        </div>
+                                        <Divider />
+                                        <div>
+                                            <Button style={{ background: 'linear-gradient(to left, #bdc3c7, #2c3e50)', color: 'white', marginTop: '3%' }} variant='outlined' onClick={updateProject}>Update</Button>
+                                            <Button onClick={close}>Cancel</Button>
+                                        </div>
+                                   
                                 </div>
-                                <Button style={{ background: 'linear-gradient(to right, #000046, #1cb5e0)', color: 'white', marginTop: '3%' }} variant='outlined' onClick={updateProject}>Update</Button>
+                            </DialogContentText>
+                        </DialogContent>
 
-                            </form>
-                        </div>
-                    </PopUp>
+                    </Dialog>
 
+                    <Link to='/projects'><Button style={{background:'linear-gradient(to left, #bdc3c7, #2c3e50)', color:'white'}} variant='outlined'>Back</Button></Link>
                 </div>
+            </Card>
 
-               
-
-
-
-                <div style={{display:'flex', justifyContent:'space-evenly', padding:'1%'}}>
-                  
-                <Card style={{width: "35%", textAlign: 'center', background: 'grey', color: 'white', border:'solid 1px white' }}>
-                    <CardHeader title={`Project Details`} />
-                    <Divider style={{width:'40%', background:'white', margin:'0 auto'}}  />
-                 
-                    <CardContent>
-                        <Typography>
-                            {currentProjects.details}
-                        </Typography>
-                    </CardContent>
-
-
-                    <List >
-                        
-
-                        <Divider style={{ background: "white", textAlign:'center' }} />
-                        <h3>Project Tasks</h3>
-                        <Divider style={{width:'35%', background:'white', margin:'0 auto'}}  />
-                        <ListItem style={{textAlign:'center'}}>
-
-                            <ListItemText key={currentTask.project_id}>
-                                {currentTask.taskname}
-                            </ListItemText>
-                        </ListItem>
-                    </List>
-                    <CardActionArea>
-
-                        <Button style={{background:'linear-gradient(to right, #000046, #1cb5e0)', color:'white'}} variant='outlined'>View Tasks</Button>
-
-                        <Link to={`${currentTask.id}/tasks`}><Button>See Tasks</Button></Link>
-
-                    </CardActionArea>
-                </Card>
-               
-
-
-
-               <Divider style={{background:'red'}} orientation='vertical' />
-                
-
-
-
-                    <Card style={{ border: 'solid 1px white', width: "45%", background: "grey", color: "white", textAlign:'center' }}>
-                        <CardHeader title='Journal' subheader='A place where you can keep your thoughts discovers and issues' />
-                        <Divider style={{ background: "white" }} />
-                        <CardContent>
-                            <div>
-                                <Typography>Title: {currentJournal.title}</Typography>
-                                <Typography>{currentJournal.journal_content}</Typography>
-                            </div>
-                        
-                        </CardContent>
-                        <CardActionArea>
-
-                            <Button style={{background:'linear-gradient(to right, #000046, #1cb5e0)', color:'white'}} variant='outlined'>View Journal's</Button>
-                        </CardActionArea>
-                    </Card>
-
-                </div>
-           
-
-                <Divider  />
-                <div onClick={deleteTag}  style={{width:'60%', padding:"1%"}}>
-                    <h5>Tags:</h5>
-                    <Chip label={currentTags.tagname}
-                       deleteIcon={<DeleteIcon />}
-                        onDelete={deleteTag}
-                    />
+            <div style={{ display: 'flex', width: "95%", margin: '0 auto' }}>
+                <Card style={{ width: '40%', margin: '0 auto', background:'#bdc3c7'}}>
+                    <CardHeader style={{ textAlign: 'center', background:'linear-gradient(to right, #bdc3c7, #2c3e50)',color:'white' }} title='Project Details' subheader={currentProjects.createdAt} />
+                    <Divider />
+                    <div style={{padding:'2%', textAlign:'center' }}>
+                        {currentProjects.details}
                     </div>
                 </Card>
 
+                <Card style={{ width: '40%', margin: '0 auto', background:'#bdc3c7' }}>
+                    <CardHeader style={{textAlign:'center', background:'linear-gradient(to right, #bdc3c7, #2c3e50)', color:'white' }} title='Tasks to complete'/>
+                    <Divider />
 
+                    <List>
+                        <ListItem button>
+                            <ListItemText>
+                                <FormControlLabel 
+                                value='demo'
+                                control={<Checkbox color='primary' />}
+                                label={currentTask.taskname}
+                                labelPlacement='haha'
+                            
+                                
+                                />
+                                </ListItemText>
+                        </ListItem>
+                    </List>
+                </Card>
 
-
-
+            </div>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import TaskOps from "../CRUD-OPS/tasksCRUD"
-import {TextField, Button} from "@material-ui/core"
+import {TextField, Button, Card, CardHeader, CardContent, CardActionArea} from "@material-ui/core"
 
 const AddTask = () => {
     const initialtaskState = {
@@ -52,37 +52,27 @@ const AddTask = () => {
     }
 
     return (
-        <div style={{width:"100%", padding:'1%', background:"grey", textAlign:'center', height:'94vh'}}>
+        <div style={{ width: "100%", textAlign: 'center', padding: "1.4%", background: 'linear-gradient(to bottom, #bdc3c7, #2c3e50)'}}>
            {submitted ? (
-               <div>
-                   <p style={{color:'white'}}>UP NEXT</p>
-                   <p style={{color:'white'}}>ADD A TAG </p>
-                   <Link to='/addtags'><Button style={{color:'white', border:'solid 1px white'}} variant='outlined' onClick={newTask}>
-                       next: Add a tag
+               <div style={{width:'100%', padding:"14.4%", boxSizing:'border-box'}}>
+                <Card>
+                    <CardHeader  />
+                    <CardContent>
+                    <p style={{ color: 'black' }}>UP Next</p>
+                    <p style={{ color: 'black' }}>Add a tag!</p>
+                    <Link to='/addtags'><Button variant='outlined' onClick={newTask}>
+                        Next: Add a tag
                        </Button></Link>
-               </div>
+                       </CardContent>
+                </Card>
+                </div>
+            
            ) : (
-               <div style={{border:"solid 1px white", width:"50%", margin:"8% auto", padding:'1%', background:"linear-gradient(to right, #000046, #1cb5e0)"}}>
-                    <p style={{color:'white'}}>Create new Task</p>
-                    <div style={{margin:"2% 0"}}>
-                       {/* <TextField
-                       
-                      style={{width:'50%'}}
-                       
-                        type='text'
-                        id='project_id'
-                        required
-                        value={task.project_id}
-                        onChange={handleChange}
-                        name='project_id'
-                        label="project_id"
-                        InputLabelProps={{
-                            style:{color:'white'}
-                        }}
-                         /> */}
-                   </div>
-
-                   <div style={{margin:"2% 0"}}>
+               <div style={{width: "100%", padding: "13%", margin: "1% auto", background: "black", background: "linear-gradient(to bottom, #bdc3c7, #2c3e50);", color: 'black', boxSizing:'border-box'}}>
+                   <Card style={{width: '60%', margin: '0 auto', background: 'linear-gradient(to right, #d3cce3, #e9e4f0)'}}>
+                       <CardHeader style={{background:'linear-gradient(to left, #bdc3c7, #2c3e50)', color:'white'}} title="Create a task for your project"  />
+                       <CardContent>
+                            <div style={{ boxSizing:'border-box'}}>
                        
                        <TextField
                        style={{width:"50%"}}
@@ -94,16 +84,40 @@ const AddTask = () => {
                         onChange={handleChange}
                         name='taskname'
                         label='Create a task'
-                        InputLabelProps={{
-                            style:{color:'white'}
-                        }}
+                        inputProps={{
+                                    style: {
+                                        color: 'black',
+                                        // textAlign: 'center'
+                                    }
+                                }}
+
+                                InputLabelProps={{
+                                    style: {
+                                        color: 'black',
+                                        // textAlign: 'center'
+                                    }
+                                }}
                          />
                    </div>
+
+                   <CardActionArea  style={{display:'flex', justifyContent:'space-evenly', margin:'3% 0%'}}>
+                      
+                       <Button style={{color:'black', border:'solid 1px black'}}  variant='outlined' onClick={saveTask}>Submit</Button>
+
+                       <Link to='/dashboard'><Button style={{color:'black', border:'solid 1px black'}}>Cancel</Button></Link>
+                 
+
+                   </CardActionArea>
+
+                       </CardContent>
+
+                   </Card>
+                   
+                    
+
                   
-                   <div>
-                       <Button style={{color:'white', border:'solid 1px white'}} variant='outlined' onClick={saveTask}>Submit</Button>
-                       <Link to='/'><Button style={{color:'white', border:'solid 1px white'}}>Cancel</Button></Link>
-                   </div>
+                  
+                   
                </div>
            )}
 

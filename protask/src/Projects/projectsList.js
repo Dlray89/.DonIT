@@ -18,11 +18,12 @@ const useStyles = makeStyles((theme) => ({
         margin: '1% 0',
         padding: '1%',
         width: "90%",
-        background:'linear-gradient(to right, #000046, #1cb5e0)',
+        background:'linear-gradient(to left, #bdc3c7, #2c3e50)',
         color:'white'
     },
     Button: {
-        background:"white"
+        background:"#2c3e50",
+        color: 'white'
     },
     btnRoot: {
 
@@ -83,7 +84,7 @@ const ProjectList = () => {
                      <p>You currently have {projects.length} Project active</p>
                 </div>
                  <div style={{width: '15%', textAlign: 'center' }}>
-                    <Link to='/addproject'><Button variant='contained' style={{background:'linear-gradient(to right, #000046, #1cb5e0)', color:"white"}} >New Project</Button></Link>
+                    <Link to='/addproject'><Button variant='contained' style={{background:'linear-gradient(to left, #bdc3c7, #2c3e50)', color:"white"}} >New Project</Button></Link>
                 </div>
             </div>
 

@@ -30,8 +30,6 @@ const AddProject = () => {
 
     //define and set initial state
     const [project, setProjects] = useState(initialProjectState)
-    const [task, setTask] = useState(initialTaskState)
-    const [tag, setTag] = useState(initialTagState)
     const [submitted, setSubmitted] = useState(false)
 
 
@@ -42,69 +40,7 @@ const AddProject = () => {
         setProjects({ ...project, [name]: value })
     }
 
-    const taskChangeHandler = e => {
-        const { name, value } = e.target
-        setTask({ ...task, [name]: value })
-    }
-
-    const tagChangeHandler = e => {
-        const { name, value } = e.target
-        setTag({ ...tag, [name]: value })
-    }
-
-    const saveTag = () => {
-        let data = {
-            name: tag.name,
-            project_id: tag.project_id
-        }
-
-        TagOps.createTag(data)
-            .then(res => {
-                setTag({
-                    id: res.data.id,
-                    name: res.data.name,
-                    project_id: res.data.project_id
-                })
-                setSubmitted(true)
-                console.log("tag created", res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
-
-    const newTag = () => {
-        setTag(initialTagState)
-        setSubmitted(false)
-    }
-
-    ///////////////////////////////
-
-    const saveTasks = () => {
-        let data = {
-            task_Name: task.task_Name,
-            project_id: task.project_id
-        }
-
-        TaskOps.createTask(data)
-            .then(res => {
-                setTask({
-                    id: res.data.id,
-                    task_Name: res.data.id,
-                    project_id: res.data.project_id
-                })
-                setSubmitted(true)
-                console.log("task create", res.data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
-
-    const newTask = () => {
-        setTask(initialTaskState)
-        setSubmitted(false)
-    }
+    
 
     const saveProject = () => {
         let data = {
