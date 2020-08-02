@@ -12,6 +12,7 @@
     "antd": "^4.3.4",
     "auth0-js": "^9.13.4",
     "axios": "^0.19.2",
+    "history": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-material-ui-calendar": "^0.2.3",
